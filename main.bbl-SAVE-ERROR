@@ -1,0 +1,133 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{ynt/global//global/global}
+    \entry{naor_what_1993}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=c6af39e79e88306281e6e0b0ccea956c}{%
+           family={Naor},
+           familyi={N\bibinitperiod},
+           given={Moni},
+           giveni={M\bibinitperiod}}}%
+        {{hash=5471318d1a906f895e86813cf5dda1d9}{%
+           family={Stockmeyer},
+           familyi={S\bibinitperiod},
+           given={Larry},
+           giveni={L\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York, {NY}, {USA}}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{10bb1288ff4a2dfec81d4d66a5bb51da}
+      \strng{fullhash}{10bb1288ff4a2dfec81d4d66a5bb51da}
+      \strng{bibnamehash}{10bb1288ff4a2dfec81d4d66a5bb51da}
+      \strng{authorbibnamehash}{10bb1288ff4a2dfec81d4d66a5bb51da}
+      \strng{authornamehash}{10bb1288ff4a2dfec81d4d66a5bb51da}
+      \strng{authorfullhash}{10bb1288ff4a2dfec81d4d66a5bb51da}
+      \field{labelalpha}{NS93}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the twenty-fifth annual {ACM} symposium on Theory of Computing}
+      \field{day}{1}
+      \field{isbn}{978-0-89791-591-5}
+      \field{month}{6}
+      \field{series}{{STOC} '93}
+      \field{title}{What can be computed locally?}
+      \field{urlday}{11}
+      \field{urlmonth}{8}
+      \field{urlyear}{2025}
+      \field{year}{1993}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{184\bibrangedash 193}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1145/167088.167149
+      \endverb
+      \verb{urlraw}
+      \verb https://www.wisdom.weizmann.ac.il/~naor/PAPERS/lcl.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.wisdom.weizmann.ac.il/~naor/PAPERS/lcl.pdf
+      \endverb
+    \endentry
+    \entry{chang_time_2017}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=2f35b199991109be10417d2d566bbd9e}{%
+           family={Chang},
+           familyi={C\bibinitperiod},
+           given={Yi-Jun},
+           giveni={Y\bibinithyphendelim J\bibinitperiod}}}%
+        {{hash=82a2e3038a862073e57bcdcd1598396f}{%
+           family={Pettie},
+           familyi={P\bibinitperiod},
+           given={Seth},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Berkeley, {CA}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{7f1cacc1959872b2279440e0ec0e36cb}
+      \strng{fullhash}{7f1cacc1959872b2279440e0ec0e36cb}
+      \strng{bibnamehash}{7f1cacc1959872b2279440e0ec0e36cb}
+      \strng{authorbibnamehash}{7f1cacc1959872b2279440e0ec0e36cb}
+      \strng{authornamehash}{7f1cacc1959872b2279440e0ec0e36cb}
+      \strng{authorfullhash}{7f1cacc1959872b2279440e0ec0e36cb}
+      \field{labelalpha}{CP17}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2017 {IEEE} 58th Annual Symposium on Foundations of Computer Science ({FOCS})}
+      \field{eventtitle}{2017 {IEEE} 58th Annual Symposium on Foundations of Computer Science ({FOCS})}
+      \field{isbn}{978-1-5386-3464-6}
+      \field{month}{10}
+      \field{title}{A Time Hierarchy Theorem for the {LOCAL} Model}
+      \field{urlday}{11}
+      \field{urlmonth}{8}
+      \field{urlyear}{2025}
+      \field{year}{2017}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{156\bibrangedash 167}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1109/FOCS.2017.23
+      \endverb
+      \verb{urlraw}
+      \verb http://ieeexplore.ieee.org/document/8104055/
+      \endverb
+      \verb{url}
+      \verb http://ieeexplore.ieee.org/document/8104055/
+      \endverb
+      \keyw{Randomized,Complexity Landscape,General Graphs,Trees,Polyglobal,Gap Result,Lovász Local Lemma}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

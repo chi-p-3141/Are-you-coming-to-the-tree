@@ -1,0 +1,133 @@
+% REQUIRED (remove if already imported smw else)
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{environ} % sizing pictures properly
+\usepackage[outline]{contour} % white outlines around text -- NOTE: might break if not using pdfLaTeX
+\usetikzlibrary{patterns}
+\usetikzlibrary{calc}
+\tikzset{lab/.style={draw,rectangle,inner sep=0}}
+
+% SETTINGS: colours and thickness
+\definecolor{base}{rgb}{1,0,0} % red
+%\definecolor{base}{rgb}{0.7, 0.7, 0.7} % grey
+
+\definecolor{darkbase}{rgb}{0.8,0,0} % dark red
+%\definecolour{darkbase}{rgb}{0.9,0.9,0.9} % dark grey
+
+% outline thickness
+\contourlength{0.1em}
+
+
+%%% INSTRUCTIONS
+
+% use everything in a begin{compline} block
+
+% base commands: \drawbase          (empty rectangle)
+%                \drawbaseunknown   (rectangle filled with unknown pattern)
+%                \drawbasefade      (faded color areas) (nice but not practical)
+
+% gap{start}{end}: creates a filled in white rectangle for a gap
+% dense{start}{end}: creates a filled in [base colour] rectangle for density
+% unknown{start}{end}: creates a dot pattern for density
+
+% ADD TICKS AFTER FILL
+
+% problem{position(0-18)}{depth}{label}: adds a thicker dark [base colour] tick at position
+
+% emptyproblem: as above, no label or layer
+
+% reference{start}{end}{label}: adds overbrace with caption over top; use for citing where the works are from
+
+% probreference{pos}{extra height}{problem}{reference}: adds line with two line caption on top, use for citing examples of tight classes. extra height might be required for spacing
+
+% multiproblem{start}{end}{depth}{xshift}{label line 1}{label line 2}: adds [base colour] underbrace for infinitely dense classes
+
+% drawtick, tick, emptytick, addbaseticks <- DEPRECATED TO REMOVE
+
+%%% CODE
+
+% scaled pictures
+\makeatletter
+\newsavebox{\measure@tikzpicture}
+\NewEnviron{scaletikzpicturetowidth}[1]{%
+  \def\tikz@width{#1}%
+  \def\tikzscale{1}\begin{lrbox}{\measure@tikzpicture}%
+  \BODY
+  \end{lrbox}%
+  \pgfmathparse{#1/\wd\measure@tikzpicture}%
+  \edef\tikzscale{\pgfmathresult}%
+  \BODY
+}
+\makeatother
+
+%\newenvironment{compline}[1][0.99]{%
+\newenvironment{compline}{%
+    \begin{center}%
+    \begin{scaletikzpicturetowidth}{0.99\textwidth}%
+    \begin{tikzpicture}[scale=\tikzscale]%
+    \drawbaseunknown%
+    }{%
+    \end{tikzpicture}%
+    \end{scaletikzpicturetowidth}%
+    \end{center}%
+    }
+    
+\newcommand{\emptyproblem}[1]{\draw[ultra thick, darkbase] (#1,0.5) -- (#1,0);}
+
+\newcommand{\problem}[3]{\draw[ultra thick, darkbase] (#1,0.5) -- (#1,0) -- ++($(0,-2ex)-(0,#2)$);%
+    \node (a) at ($(#1,-#2)-(0,3.5ex)$) {\contour{white}{#3}};%
+    }
+% ^ tried to make these both into a single 4 argument command, and it broke for some reason. So they're different for now
+
+\newcommand{\multiproblem}[6]{%
+    \draw[decorate,decoration={brace,raise=0.5ex,amplitude=2ex}, thick, red] (#2,0) --  (#1,0);%
+    \coordinate (CENTER) at ($(#1,-0.5)!0.5!(#2,-0.5)+(0,0.5ex)$);%
+    \draw[thick,red] (CENTER) -- ++(0,-0.1) -- ++(0,-#3);%
+    \coordinate (LABEL) at ($(#1,0)!0.5!(#2,0)+(0,-0.8)+(#4,-#3)$);%
+    \node (a) at (LABEL) {\contour{white}{#5}};%
+    \node (b) at ($(LABEL)-(0,3ex)$) {\contour{white}{#6}};%
+    }
+
+\newcommand{\reference}[3]{%
+    \draw[decorate,decoration={brace,raise=0.5ex,amplitude=2ex}, thick] (#1,0.5) --  (#2,0.5);%
+    \coordinate (CENTER) at ($(#1,1)!0.5!(#2,1)-(0,0.15ex)$);%
+    \coordinate (LABEL) at ($(#1,1)!0.5!(#2,1)+(0,0.2)$);%
+    \draw[thick] (CENTER) -- (LABEL);%
+    \node (a) at (LABEL) {\contour{white}{#3}};%
+    }
+
+\newcommand{\probreference}[4]{%
+    \coordinate (LABEL) at ($(#1,1.5)+(0,#2)$);%
+    \draw[thick] (#1,0.5) -- (LABEL);%
+    \node (a) at ($(#1,#2)+(0,1.5)+(0,4ex)$) {\contour{white}{#3}};%
+    \node (a) at ($(#1,#2)+(0,1.5)+(0,1ex)$) {\contour{white}{#4}};%
+    }
+
+\newcommand{\baseticks}[1]{%
+    \tick{0}{#1}{$O(1)$}%
+    \tick{6}{#1}{$\Theta(\log^*n)$}%
+    \tick{12}{#1}{$\Theta(\log n)$}%
+    \tick{18}{#1}{$\Theta(n)$}%
+}
+
+\newcommand{\dense}[2]{%
+    \draw[fill=red, draw=none] ($(#1,0)+(0.075mm,0.075mm)$) rectangle ($(#2,0.5)-(0.075mm,0.075mm)$);%
+}
+
+\newcommand{\gap}[2]{%
+    \draw[fill=white, draw=none] ($(#1,0)+(0.075mm,0.075mm)$) rectangle ($(#2,0.5)-(0.075mm,0.075mm)$);%
+}
+
+\newcommand{\unknown}[2]{%
+    \pgfsetfillpattern{crosshatch dots}{base}%
+    \filldraw[draw=none] (#1,0) rectangle (#2,0.5);%
+}
+
+\newcommand{\drawbase}{%
+    \draw (0,0) rectangle (18,0.5);%
+}
+
+\newcommand{\drawbaseunknown}{%
+    \pgfsetfillpattern{crosshatch dots}{base}%
+    \filldraw (0,0) rectangle (18,0.5);%
+}
