@@ -1,0 +1,129 @@
+\documentclass[12pt,a4paper]{article}
+\input{Preamble/packages}
+\input{Preamble/commands}
+\addbibresource{ref.bib}
+\begin{document}
+
+\section{Definitions}
+% General note: I wrote this all out as an exercise in getting my definitions straight, it does not need to be THIS detailed.
+
+\subsection{Notation}
+We will use $\delta(v)$ to refer to the set of edges adjacent to $v$. We identify half-edges in a graph $G=(V,E)$ with a pair $(e,v)$ where $e\in\delta(v)$, referring to the half of $e$ adjacent to $v$.
+
+We use $\MSet{\star}$ to refer to multisets, and the following notation for multisubsets of a set $A$:
+\begin{itemize}
+    \item $A^{\MSet{k}}$ refers to the set of all multisubsets of $A$ of size $k\in\N$,
+    \item $A^{\MSet{\N}}$ refers to the set of all finite multisubsets of $A$,
+    \item $A^{\MSet{\star}}$ refers to the set of all multisubsets of $A$.
+\end{itemize}
+\subsection{Common and uncommon assumptions}
+%\airquotes{Unless otherwise \emph{explicitly} stated...}
+\textbf{$T$-hop neighbourhoods:} we define a \emph{$T$-hop centered neighbourhood} as a \emph{centered graph of radius $T$} using the definitions from page 4 of \cite{naor_what_1993}. Note that, in the case of subgraphs, the $T$-hop neighbourhood of $v$ may be different from the subgraph induced by all nodes that have distance at most $T$ from $v$.
+
+\textbf{Local model:} we work in the \emph{deterministic} LOCAL model with input labels. No assumptions are made about the number of input or output labels. We assume the nodes are aware of the exact number $n$ of nodes in the input graph, but not of any information about the maximum degree $\Delta$. Because of this information, we equivalently describe a LOCAL algorithm as a $T(n)$-round communication algorithm with unbounded message size, or as a \emph{possibly uncomputable} function from $T(n)$-hop centered neighbourhoods to output labels. Additionally, we assume there is a finite integer $c$ such that every node is assigned a unique ID in the set $\Set{1,\ldots,n^c}$, but the nodes are not aware of the value of $c$.
+
+\textbf{Solvability:} we say that a problem is \emph{weakly unsolvable} if there are finitely many unsolvable instances for it. We will treat weakly unsolvable problems as solvable problems by adding one output label $U$ and requiring the problem to output $U$ on all nodes if the instance is unsolvable; this requires only constant time, so it does not affect asymptotic complexity. We call the maximum diameter of an unsolvable instance the \emph{solvability horizon} of the weakly unsolvable problem. We say that a problem is \emph{strongly unsolvable} if there are infinitely many unsolvable instances for it.
+%note: some further nuance could be given for "infinitely many solvable and unsolvable instances" eg, 2 colouring on cycles, but it is not relevant to the work I want to put in here.
+%similarly, "verifiably unsolvable" for infinitely many unsolvable instances that can be checked in constant time by every node, but I still have no examples of this (I think there are none in LCLs but could be wrong).
+
+\textbf{LCL problems:} we define LCL problems as tuples $\Pi=(\Sigma\uin,\Sigma\uout,r,\mathcal{C})$ where:
+\begin{itemize}
+    \item $\Sigma\uin$ is a set of input labels,
+    \item $\Sigma\uout$ is a set of output labels,
+    \item $r$ is a finite integer, called the \emph{radius} of $\Pi$, and
+    \item $\mathcal{C}$ is a \emph{finite} set of $r$-hop centered neighbourhoods, where each node is labelled by a pair in $\Sigma\uin\times\Sigma\uout$.
+\end{itemize}
+Though we haven't explicitly stated this in the definition, WLOG we can and will also assume that $\Sigma\uin$ is finite (else the problem would be strongly unsolvable) and that $\Sigma\uout$ is finite (any labels that don't appear in $\mathcal{C}$ will not appear in any valid solution and can be ignored).
+%instance and solution as usual.
+\subsection{New-ish definitions}
+%these are definitions that have appeared before (cited) but are not "commonly used" as far as I could tell
+%or are natural variants of common definitions
+\textbf{Hanging trees:} \emph{connected} tree graphs containing a finite number of incomplete half-edges, called \emph{hooks}. Specifically, we will call hanging trees with one hook \emph{ornaments} and hanging trees with two hooks \emph{tinsels}.
+% I'm using christmasy terms for things because they make a nice and intuitive visual, but also because "hanging trees" could have... a different connotation.
+
+\textbf{Class:} given an ornament $T$ and a node-edge checkable problem $\Pi$, we define the \emph{class} of $T$ to be the set $\mathfrak{Cl}(T)\subseteq \Sigma\uout$ containing exactly the labellings of the hook that can be completed to a valid labelling for $T$ according to $\Pi$. Up to the changed role of nodes and edges, this is the \emph{class} definition from Section 3 of \cite{chang_time_2017}.
+%I have been calling them types, but chang-pettie calls them classes and uses types for paths... I'm trying to stick to classes but there might be mistakes
+%TODO classes for ornaments/general hanging trees. Mostly concerned about keeping track of which label goes where in a nice way. Leaving it for if I try to generalise the proof for non-trees.
+
+\subsection{Actually new definitions}
+%There's some discussion I want to make about writing the def below in "round eliminator formalism", but for now it's closer to node-edge checkable
+% the "Extended" is the more formally complicated but intuitive definition; the normal FSL definition is formally simpler, just as powerful, but not as easy to understand
+\textbf{Finitely Represented Configuration:} given an alphabet of symbols $\Sigma$, we call a \emph{finitely represented configuration} of $\Sigma$ a pair of a \emph{finite} multisubset of $\Sigma$ (the \emph{requirement}) and a \emph{finite} subset of $\Sigma$ (the \emph{filler}).
+We denote the set of finitely represented configurations in $\Sigma$ as 
+$$\Sigma^{FSL}:=\Sigma^{\MSet{\N}}\times \left[\Sigma\right]^{<\omega}$$
+
+\textbf{Extended Finite State Labelling problems:} we define Extended FSL problems as tuples $\Pi=(\Sigma\uin,\Sigma\uout,f,\Nc,\Ec)$ where:
+\begin{itemize}
+    \item $\Sigma\uin$ is a \emph{finite} set of input labels,
+    \item $\Sigma\uout$ is a \emph{finite} set of output labels,
+    \item $f:\N\to2^{\Sigma\uin}$ is a function describing which input labels are allowed to appear for a node of degree $d\in\N$,
+    \item $\Nc:\Sigma\uin\to 2^{(\Sigma\uout)^{FSL}}$ is a function assigning to each input label a set of \emph{finitely represented configurations} of $\Sigma\uout$, and 
+    \item $\Ec$ is a set of pairs of elements of $\Sigma\uout$.
+\end{itemize}
+An \emph{instance} for $\Pi$ is a graph $G=(V,E)$ together with a labelling function $l:V\to\Sigma\uin$ such that $l(v)\in f(\deg(v))$, that is, the labelling is coherent with the \airquotes{allowed} labels for each degree.\\
+A \emph{solution} for this instance is a labelling $s$ of the half-edges of $G$ such that:
+\begin{itemize}
+    \item $\forall v\in V$, let $S(v):=\MSet{s(e,v)\dv e\in\delta(v)}$; then there exists $(R,F)\in\Nc(l(v))$ such that $R\subseteq S(v)$ and $(S(v)\smallsetminus R)\subseteq F^{\MSet{\star}}$, that is to say, every symbol in the requirement appears exactly once in $S(v)$, and every other symbol of $S(v)$ is a filler symbol, and 
+    \item $\forall e=\Set{u,v}\in E$ we have $\Set{s(e,u),s(e,v)}\in\Ec$.
+\end{itemize}
+
+\textbf{Finite State Labelling problems:} we define FSL problems as tuples $\Pi=(\Sigma\uout,\Nc,\Ec)$ where:
+\begin{itemize}
+    \item $\Sigma\uout$ is a \emph{finite} set of output labels,
+    \item $\Nc\subseteq 2^{(\Sigma\uout)^{FSL}}$ is a \emph{finite} set of finitely represented configurations of $\Sigma\uout$,
+    \item $\Ec$ is a set of pairs of elements of $\Sigma\uout$.
+\end{itemize}
+An \emph{instance} for $\Pi$ is any graph; a solution for this instance is a labelling $s$ of the half-edges of $G$ such that:
+\begin{itemize}
+    \item $\forall v\in V$, let $S(v):=\MSet{s(e,v)\dv e\in\delta(v)}$; then there exists $(R,F)\in\Nc$ such that $R\subseteq S(v)$ and $(S(v)\smallsetminus R)\subseteq F^{\MSet{\star}}$, that is to say, every symbol in the requirement appears exactly once in $S(v)$, and every other symbol of $S(v)$ is a filler symbol, and 
+    \item $\forall e=\Set{u,v}\in E$ we have $\MSet{s(e,u),s(e,v)}\in\Ec$.
+\end{itemize}
+
+\textbf{Width:} we define the \emph{width} of a FSL problem as $\max\Set{\card{R}:(R,F)\in\Nc}$ (the maximum length of one of its requirements).
+
+\section{List of results}
+\begin{enumerate}
+    \item Extended FSL = FSL (up to changing the number of labels) %we can encode input/degree info in the structure and output labels
+    \item Node-edge checkable problems $\subseteq$ FSL
+    \item Weak and strong solvability are decidable on FSL
+\end{enumerate}
+\section{List of possible results}
+\begin{enumerate}
+    \item If a FSL problem is known to be $\Omega(\log n)$ on trees, its complexity on trees is decidable and an efficient algorithm can be found. (This holds because of Gustav's proof which should be stronger, it's in here because I still haven't written out all the details of the FSL based one)
+    \item (Belief I haven't been able to fully prove) For each FSL problem $\Pi$ there is a value $d$ that only depends on the problem description (specifically, number of labels and width) such that there is a worst-case family of graphs for $\Pi$ of maximum degree $d$. 
+    \item (Investigating) A form of the Round Elimination procedure applies to FSL problems.
+\end{enumerate}
+\section{What do we know about the complexity landscape?}
+\subsection{Trees}
+\subsection{General graphs}
+
+%\section{Proofs}
+%\subsection{Computing Hanging Trees}
+%\subsection{Solvability}
+%\subsection{The \texorpdfstring{$O(\log n)--n^{\Omega(1)}$}{log n to polynomial} gap}
+\pagebreak
+\printbibliography[
+heading=bibintoc,
+title={Bibliography}]
+\end{document}
+
+
+%% OLD STUFF I REMOVED generally ignore anything below here
+
+%star/filling boxes problem
+%leaf/branch label for a constraint
+%hanging tree types
+
+\pagebreak
+\section{The very rough idea}
+I have the following algorithms:
+\begin{itemize}
+    \item \textsf{Hanger} finds all possible hanging tree types, as well as keeping track of which ones are only finite and which are not.
+    \item \textsf{Path} decides whether a node-edge checkable problem on paths with input labels is: 
+\begin{itemize}
+    \item weakly solvable with complexity $O(\log n)$
+    \item weakly solvable with complexity $\Theta(n)$
+    \item strongly unsolvable
+\end{itemize}    
+\end{itemize} 
+I want to use them to decide the complexity of a $\Omega(\log n)$ node-edge checkable problem on bounded degree trees. Plan: use rake-and-compress, solving path problems as you go, keeping the global ones out. if you can do it till the end, it's O(log n) if you get a forced global immediately it's O(n) if you do it after k steps it's O(n 1/k).
