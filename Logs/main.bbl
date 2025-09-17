@@ -1,0 +1,243 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{ynt/global//global/global}
+    \entry{naor_what_1993}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=c6af39e79e88306281e6e0b0ccea956c}{%
+           family={Naor},
+           familyi={N\bibinitperiod},
+           given={Moni},
+           giveni={M\bibinitperiod}}}%
+        {{hash=5471318d1a906f895e86813cf5dda1d9}{%
+           family={Stockmeyer},
+           familyi={S\bibinitperiod},
+           given={Larry},
+           giveni={L\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York, {NY}, {USA}}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{10bb1288ff4a2dfec81d4d66a5bb51da}
+      \strng{fullhash}{10bb1288ff4a2dfec81d4d66a5bb51da}
+      \strng{bibnamehash}{10bb1288ff4a2dfec81d4d66a5bb51da}
+      \strng{authorbibnamehash}{10bb1288ff4a2dfec81d4d66a5bb51da}
+      \strng{authornamehash}{10bb1288ff4a2dfec81d4d66a5bb51da}
+      \strng{authorfullhash}{10bb1288ff4a2dfec81d4d66a5bb51da}
+      \field{labelalpha}{NS93}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the twenty-fifth annual {ACM} symposium on Theory of Computing}
+      \field{day}{1}
+      \field{isbn}{978-0-89791-591-5}
+      \field{month}{6}
+      \field{series}{{STOC} '93}
+      \field{title}{What can be computed locally?}
+      \field{urlday}{11}
+      \field{urlmonth}{8}
+      \field{urlyear}{2025}
+      \field{year}{1993}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{184\bibrangedash 193}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1145/167088.167149
+      \endverb
+      \verb{urlraw}
+      \verb https://www.wisdom.weizmann.ac.il/~naor/PAPERS/lcl.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.wisdom.weizmann.ac.il/~naor/PAPERS/lcl.pdf
+      \endverb
+    \endentry
+    \entry{barenboimSublogarithmicDistributedMIS2010}{article}{}
+      \name{author}{2}{}{%
+        {{hash=82139fd6333c09f50208cf3610b9354d}{%
+           family={Barenboim},
+           familyi={B\bibinitperiod},
+           given={Leonid},
+           giveni={L\bibinitperiod}}}%
+        {{hash=5879032f87d6fc2528a738ea03797cb0}{%
+           family={Elkin},
+           familyi={E\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{e947556d33b5087141055b3d1c522121}
+      \strng{fullhash}{e947556d33b5087141055b3d1c522121}
+      \strng{bibnamehash}{e947556d33b5087141055b3d1c522121}
+      \strng{authorbibnamehash}{e947556d33b5087141055b3d1c522121}
+      \strng{authornamehash}{e947556d33b5087141055b3d1c522121}
+      \strng{authorfullhash}{e947556d33b5087141055b3d1c522121}
+      \field{labelalpha}{BE10}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{1}
+      \field{issn}{1432-0452}
+      \field{journaltitle}{Distributed Computing}
+      \field{langid}{english}
+      \field{month}{8}
+      \field{number}{5}
+      \field{shortjournal}{Distrib. Comput.}
+      \field{title}{Sublogarithmic Distributed {{MIS}} Algorithm for Sparse Graphs Using {{Nash-Williams}} Decomposition}
+      \field{urlday}{16}
+      \field{urlmonth}{9}
+      \field{urlyear}{2025}
+      \field{volume}{22}
+      \field{year}{2010}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{363\bibrangedash 379}
+      \range{pages}{17}
+      \verb{doi}
+      \verb 10.1007/s00446-009-0088-2
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/s00446-009-0088-2
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/s00446-009-0088-2
+      \endverb
+    \endentry
+    \entry{chang_time_2017}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=2f35b199991109be10417d2d566bbd9e}{%
+           family={Chang},
+           familyi={C\bibinitperiod},
+           given={Yi-Jun},
+           giveni={Y\bibinithyphendelim J\bibinitperiod}}}%
+        {{hash=82a2e3038a862073e57bcdcd1598396f}{%
+           family={Pettie},
+           familyi={P\bibinitperiod},
+           given={Seth},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Berkeley, {CA}}%
+      }
+      \strng{namehash}{7f1cacc1959872b2279440e0ec0e36cb}
+      \strng{fullhash}{7f1cacc1959872b2279440e0ec0e36cb}
+      \strng{bibnamehash}{7f1cacc1959872b2279440e0ec0e36cb}
+      \strng{authorbibnamehash}{7f1cacc1959872b2279440e0ec0e36cb}
+      \strng{authornamehash}{7f1cacc1959872b2279440e0ec0e36cb}
+      \strng{authorfullhash}{7f1cacc1959872b2279440e0ec0e36cb}
+      \field{labelalpha}{CP17}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eventtitle}{2017 {IEEE} 58th Annual Symposium on Foundations of Computer Science ({FOCS})}
+      \field{isbn}{978-1-5386-3464-6}
+      \field{month}{10}
+      \field{title}{A Time Hierarchy Theorem for the {LOCAL} Model}
+      \field{urlday}{11}
+      \field{urlmonth}{8}
+      \field{urlyear}{2025}
+      \field{year}{2017}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{156\bibrangedash 167}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1109/FOCS.2017.23
+      \endverb
+      \verb{urlraw}
+      \verb http://ieeexplore.ieee.org/document/8104055/
+      \endverb
+      \verb{url}
+      \verb http://ieeexplore.ieee.org/document/8104055/
+      \endverb
+    \endentry
+    \entry{balliuDistributedColoringPlays2022}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=b4e4a45b226f3d0747e68fcd1360e3cd}{%
+           family={Balliu},
+           familyi={B\bibinitperiod},
+           given={Alkida},
+           giveni={A\bibinitperiod}}}%
+        {{hash=08f2f12b0059d3a20f044c95e0b0e4e1}{%
+           family={Brandt},
+           familyi={B\bibinitperiod},
+           given={Sebastian},
+           giveni={S\bibinitperiod}}}%
+        {{hash=06b0d2204e3c0bd58a7482152b266209}{%
+           family={Kuhn},
+           familyi={K\bibinitperiod},
+           given={Fabian},
+           giveni={F\bibinitperiod}}}%
+        {{hash=f2257f6ce4ce5acddae7e3d050ebc0bb}{%
+           family={Olivetti},
+           familyi={O\bibinitperiod},
+           given={Dennis},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York, NY, USA}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{6940b50f049dffe526417e6e2498d175}
+      \strng{fullhash}{0f5dc24e3bb450d369bb95fa1f3f41f1}
+      \strng{bibnamehash}{6940b50f049dffe526417e6e2498d175}
+      \strng{authorbibnamehash}{6940b50f049dffe526417e6e2498d175}
+      \strng{authornamehash}{6940b50f049dffe526417e6e2498d175}
+      \strng{authorfullhash}{0f5dc24e3bb450d369bb95fa1f3f41f1}
+      \field{labelalpha}{Bal+22}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 54th {{Annual ACM SIGACT Symposium}} on {{Theory}} of {{Computing}}}
+      \field{day}{10}
+      \field{isbn}{978-1-4503-9264-8}
+      \field{month}{6}
+      \field{series}{{{STOC}} 2022}
+      \field{title}{Distributed $\Delta$-Coloring Plays Hide-and-Seek}
+      \field{urlday}{16}
+      \field{urlmonth}{9}
+      \field{urlyear}{2025}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{464\bibrangedash 477}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.1145/3519935.3520027
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/3519935.3520027
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/3519935.3520027
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
