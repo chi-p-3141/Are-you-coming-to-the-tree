@@ -1,21 +1,10 @@
 \begin{center}\begin{scaletikzpicturetowidth}{0.99\textwidth}
 \begin{tikzpicture}[scale=\tikzscale]
 \drawbaseunknown
-\gap{12}{18}
-\problem{15}{0}{$\Theta(n^{1/k})$}
-\emptyproblem{15.1}
-\emptyproblem{15.22}
-\emptyproblem{15.38}
-\emptyproblem{15.55}
-\problem{15.75}{3}{$\Theta(n^{1/4})$}
-\problem{16}{2}{$\Theta(n^{1/3})$}
-\problem{16.5}{1}{$\Theta(n^{1/2})$}
-\problem{11}{1}{$\Theta(\frac{\log n}{\log\log n})$}
-\problem{12}{0}{$\Theta(\log n)$}
-\problem{6}{0}{$\Theta(\log^* n)$}
+
 \problem{0}{0}{$O(1)$}
 \problem{18}{0}{$\Theta(n)$}
-\reference{12}{18}{Decidable}
+\reference{0}{5}{Decidable}
 \probreference{11}{-0.5}{MIS}{\cite{barenboimSublogarithmicDistributedMIS2010},\cite{balliuDistributedColoringPlays2022}}
 \end{tikzpicture}
 \end{scaletikzpicturetowidth}\end{center}

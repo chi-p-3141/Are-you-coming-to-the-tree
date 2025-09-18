@@ -85,7 +85,12 @@ An \emph{instance} for $\Pi$ is any graph; a solution for this instance is a lab
     \item $\forall e=\Set{u,v}\in E$ we have $\MSet{s(e,u),s(e,v)}\in\Ec$.
 \end{itemize}
 
-\textbf{Width:} we define the \emph{width} of a FSL problem as $\max\Set{\card{R}:(R,F)\in\Nc}$ (the maximum length of one of its requirements).
+\textbf{Width:} we define the \emph{width} of a EFSL problem as $\max\Set{\card{R}\dv\exists\chi\in\Sigma\uin:R\in\Nc(\chi)}$ (the maximum length of one of its requirements). For FSL problems we define it as $\max\Set{\card{R}:(R,F)\in\Nc}$.
+
+\textbf{Height:} we define the \emph{height} of an EFSL problem as $\max\Set{\card{\Nc(\chi)}\dv\chi\in\Sigma\uin}$ (the maximum number of configurations any node can be in). For FSL problems we define it as $\card{\Nc}$.
+
+\textbf{Restricted (E)FSL:} we define the \emph{restriction} of an (E)FSL the \emph{node-edge checkable} problem with input labels obtained by replacing every finitely represented configuration $(R,F)$ with the configurations $\Set{R\cup\MSet{x}\dv x\in F}$.
+
 
 \section{List of results}
 \begin{enumerate}
@@ -96,7 +101,7 @@ An \emph{instance} for $\Pi$ is any graph; a solution for this instance is a lab
 \section{List of possible results}
 \begin{enumerate}
     \item If a FSL problem is known to be $\Omega(\log n)$ on trees, its complexity on trees is decidable and an efficient algorithm can be found. (This holds because of Gustav's proof which should be stronger, it's in here because I still haven't written out all the details of the FSL based one)
-    \item (Belief I haven't been able to fully prove) For each FSL problem $\Pi$ there is a value $d$ that only depends on the problem description (specifically, number of labels and width) such that there is a worst-case family of graphs for $\Pi$ of maximum degree $d$. 
+    \item (Belief I haven't been able to fully prove) For each FSL problem $\Pi$ there is a value $d$ that only depends on the problem description (specifically, number of labels, height and width) such that there is a worst-case family of graphs for $\Pi$ of maximum degree $d$. My theory is either width$+1$ or width$\cdot$height. Latter is required for solvability.
     \item (Investigating) A form of the Round Elimination procedure applies to FSL problems.
 \end{enumerate}
 \section{What do we know about the complexity landscape?}

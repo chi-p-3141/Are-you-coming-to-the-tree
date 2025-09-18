@@ -12,6 +12,7 @@
 \problem{16.5}{1}{$\Theta(n^{1/2})$}
 \problem{11}{1}{$\Theta(\frac{\log n}{\log\log n})$}
 \problem{12}{0}{$\Theta(\log n)$}
+\problem{4}{1}{$\Theta(\log\log^* n)$}
 \problem{6}{0}{$\Theta(\log^* n)$}
 \problem{0}{0}{$O(1)$}
 \problem{18}{0}{$\Theta(n)$}
