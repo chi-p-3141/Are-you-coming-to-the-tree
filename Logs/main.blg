@@ -1,15 +1,15 @@
 [0] Config.pm:307> INFO - This is Biber 2.19
-[0] Config.pm:310> INFO - Logfile is 'Logs/main.blg'
-[38] biber:340> INFO - === Wed Sep 17, 2025, 14:46:48
-[54] Biber.pm:419> INFO - Reading 'Logs/main.bcf'
-[104] Biber.pm:979> INFO - Found 4 citekeys in bib section 0
-[116] Biber.pm:4419> INFO - Processing section 0
-[124] Biber.pm:4610> INFO - Looking for bibtex file 'ref.bib' for section 0
-[125] bibtex.pm:1713> INFO - LaTeX decoding ...
-[129] bibtex.pm:1519> INFO - Found BibTeX data source 'ref.bib'
-[167] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[167] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[167] Biber.pm:4239> INFO - Sorting list 'ynt/global//global/global' of type 'entry' with template 'ynt' and locale 'en-US'
-[167] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-US'
-[172] bbl.pm:660> INFO - Writing 'Logs/main.bbl' with encoding 'UTF-8'
-[174] bbl.pm:763> INFO - Output to Logs/main.bbl
+[1] Config.pm:310> INFO - Logfile is 'Logs/main.blg'
+[47] biber:340> INFO - === Mon Sep 22, 2025, 14:51:57
+[56] Biber.pm:419> INFO - Reading 'Logs/main.bcf'
+[89] Biber.pm:979> INFO - Found 4 citekeys in bib section 0
+[95] Biber.pm:4419> INFO - Processing section 0
+[102] Biber.pm:4610> INFO - Looking for bibtex file 'ref.bib' for section 0
+[102] bibtex.pm:1713> INFO - LaTeX decoding ...
+[107] bibtex.pm:1519> INFO - Found BibTeX data source 'ref.bib'
+[151] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[151] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[151] Biber.pm:4239> INFO - Sorting list 'ynt/global//global/global' of type 'entry' with template 'ynt' and locale 'en-US'
+[151] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-US'
+[157] bbl.pm:660> INFO - Writing 'Logs/main.bbl' with encoding 'UTF-8'
+[159] bbl.pm:763> INFO - Output to Logs/main.bbl
