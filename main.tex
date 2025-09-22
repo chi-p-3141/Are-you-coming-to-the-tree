@@ -185,18 +185,76 @@ represented configuration $(R,F)$ with the configurations $\Set{R\cup\MSet{x}\dv
     \item (Belief I haven't been able to fully prove) For each FSL problem $\Pi$ there is
     a value $d$ that only depends on the problem description (specifically, number of
     labels, height and width) such that there is a worst-case family of graphs for $\Pi$
-    of maximum degree $d$. My theory is either width$+1$ or width$\cdot$height. Latter is
+    of maximum degree $d$. My theory is either width$+1$ or width$\cdot$height (also
+    possible: width+height, using one of each filler). Latter is
     required for solvability.
     \item (Investigating) A form of the Round Elimination procedure applies to FSL
     problems.
 \end{enumerate}
+
+
+\section{Proofs} 
+\subsection{Equivalence of EFSL and FSL}
+In this section, we show that the EFSL and FSL can encode the same problems. 
+\begin{thm}
+    For each FSL problem $\Pi$ that has a LOCAL algorithm $A$ with complexity $T(n)$,
+    there is an EFSL problem $\Pi'$ which has a LOCAL algorithm $A'$ with complexity $O(T(n))$.
+\end{thm}
+\begin{proof}
+    Let $\Pi=(\Sigma\uout,\Nc,\Ec)$. We define
+    $\Pi'=(\Sigma\uin',\Sigma\uout',f',\Nc',\Ec')$ as follows:
+    \begin{itemize}
+        \item $\Sigma\uin'=\Set{\star}$,
+        \item $\Sigma\uout'=\Sigma\uout$,
+        \item $f'$ is the constant function $f(n)=\Set{\star}$,
+        \item $\Nc'(\star)=\Nc$,
+        \item $\Ec'=\Ec$.
+    \end{itemize}
+    It is trivial to observe that this is the same problem, and can be solved with the
+    same complexity as $\Pi$.
+\end{proof}
+\begin{thm}
+    For each EFSL problem $\Pi$ that has a LOCAL algorithm $A$ with complexity $T(n)$,
+    there is an FSL problem $\Pi'$ which has a LOCAL algorithm $A'$ with complexity
+    $O(T(n))$.
+\end{thm}
+This is the more complex of the two proofs, so we provide an overview before getting into
+the technical details: we encode the $k$-th input label as a line of degree $3$ nodes of
+length $k$, and add leaves as needed to make sure every node of the original graph is of
+degree $\geq 4$. This at most multiplies the number of nodes by $3\card{\Sigma\uin}$, and
+every node can in finite time compute its own input label by looking at its
+$(\card{\Sigma\uin}+1)$-hop neighbourhood. To make sure 
+\begin{proof}
+    Let $\Pi=(\Sigma\uin,\Sigma\uout,f,\Nc,\Ec)$. Up to a bijection we can identify the
+    set $\Sigma\uin$ with the set $\Set{1,\ldots,k}$.
+    We define $\Pi'=(\Sigma\uout',\Nc',\Ec')$
+    as:
+    \begin{itemize}
+        \item $\Sigma\uout'=\Sigma\uout\cup \Sigma_I$, where $\Sigma_I:=\Set{(I,n)\dv n\in\Sigma\uin}\cup\Set{(I,L),(I,Err),Err}$,
+        \item $\Ec'=\Ec\cup\Set{\MSet{X,X}\dv X\in \Sigma_I}$ (every edge containing the
+        new input labels is symmetric).
+    \end{itemize}
+    $\Nc'$ has a more complex formula, so we provide an algorithm to derive it from $f$
+    and $\Nc$ instead:
+    % I will write this with the pseudocode package at some point. This is just to check
+    % that everything works.
+    \begin{enumerate}
+        \item %HUH. there is something EFSL can encode that FSL cannot: the fact that some
+        % labels are excluded by the function f. I cannot encode, for example,
+        % let all odd degree nodes do this and all even degree nodes do that, even if
+        % neither depends on degree (eg: weak 2 colouring for odd degrees only). I thought
+        % I could do it by giving it an input label, but I would have to either have
+        % infinite input labels (encoding all possible degrees) or have instances that
+        % might be correct other than the wrong input labels, which could be harder (weak
+        % 2col is one such example)
+    \end{enumerate}
+\end{proof}
+
 \section{What do we know about the complexity landscape?}
 \subsection{Trees}
 \input{Pictures/Trees}
 \subsection{General graphs}
 
-%\section{Proofs} \subsection{Computing Hanging Trees} \subsection{Solvability}
-%\subsection{The \texorpdfstring{$O(\log n)--n^{\Omega(1)}$}{log n to polynomial} gap}
 \pagebreak
 \printbibliography[ heading=bibintoc, title={Bibliography}]
 \end{document}
