@@ -1,15 +1,15 @@
 [0] Config.pm:307> INFO - This is Biber 2.19
 [0] Config.pm:310> INFO - Logfile is 'Logs/main.blg'
-[38] biber:340> INFO - === Mon Sep 22, 2025, 16:24:30
-[60] Biber.pm:419> INFO - Reading 'Logs/main.bcf'
-[95] Biber.pm:979> INFO - Found 4 citekeys in bib section 0
-[102] Biber.pm:4419> INFO - Processing section 0
-[109] Biber.pm:4610> INFO - Looking for bibtex file 'ref.bib' for section 0
-[109] bibtex.pm:1713> INFO - LaTeX decoding ...
-[113] bibtex.pm:1519> INFO - Found BibTeX data source 'ref.bib'
-[151] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[151] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[151] Biber.pm:4239> INFO - Sorting list 'ynt/global//global/global' of type 'entry' with template 'ynt' and locale 'en-US'
-[151] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-US'
-[156] bbl.pm:660> INFO - Writing 'Logs/main.bbl' with encoding 'UTF-8'
-[160] bbl.pm:763> INFO - Output to Logs/main.bbl
+[42] biber:340> INFO - === Tue Sep 23, 2025, 10:34:20
+[51] Biber.pm:419> INFO - Reading 'Logs/main.bcf'
+[82] Biber.pm:979> INFO - Found 4 citekeys in bib section 0
+[89] Biber.pm:4419> INFO - Processing section 0
+[94] Biber.pm:4610> INFO - Looking for bibtex file 'ref.bib' for section 0
+[95] bibtex.pm:1713> INFO - LaTeX decoding ...
+[99] bibtex.pm:1519> INFO - Found BibTeX data source 'ref.bib'
+[137] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[137] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[137] Biber.pm:4239> INFO - Sorting list 'ynt/global//global/global' of type 'entry' with template 'ynt' and locale 'en-US'
+[137] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-US'
+[142] bbl.pm:660> INFO - Writing 'Logs/main.bbl' with encoding 'UTF-8'
+[143] bbl.pm:763> INFO - Output to Logs/main.bbl

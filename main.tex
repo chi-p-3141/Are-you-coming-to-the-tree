@@ -107,7 +107,8 @@ tuples $\Pi=(\Sigma\uin,\Sigma\uout,f,\Nc,\Ec)$ where:
     \item $\Sigma\uin$ is a \emph{finite} set of input labels,
     \item $\Sigma\uout$ is a \emph{finite} set of output labels,
     \item $f:\N\to2^{\Sigma\uin}$ is a function describing which input labels are allowed
-    to appear for a node of degree $d\in\N$,
+    to appear for a node of degree $d\in\N$ which is surjective on some cover of
+    $\Sigma\uin$ (in other words, each label in $\Sigma\uin$ appears in some set in $f(\N)$),
     \item $\Nc:\Sigma\uin\to 2^{(\Sigma\uout)^{FSL}}$ is a function assigning to each
     input label a set of \emph{finitely represented configurations} of $\Sigma\uout$, and 
     \item $\Ec$ is a set of pairs of elements of $\Sigma\uout$.
@@ -144,9 +145,7 @@ of the half-edges of $G$ such that:
 
 \textbf{Minimum degree of a label:} we define the \emph{minimum degree} of an input label
 $\chi\in\Sigma\uin$ as $\deg_{\min}(\chi):=\min\Set{d\in\N\dv \chi\in f(d)}$ (the minimum
-degree for which that input label is allowed). If this set is empty, i.e. $\chi$ is not
-allowed for any degree, we assign $\deg_{\min}(\chi):=0$ and observe that the problem would
-not change complexity if $\chi$ was removed from the problem description. Generally, we
+degree for which that input label is allowed). This set is never empty. Generally, we
 can assume that $\forall (R,F)\in \Nc(\chi)$ we have $\card{R}=\deg_{\min}(\chi)$, since a
 configuration with a longer requirement would be unattainable by a finite number of degrees (which can
 be encoded by putting them in separate input classes) and any configuration with a shorter
@@ -236,8 +235,6 @@ $(\card{\Sigma\uin}+1)$-hop neighbourhood. To make sure
     \end{itemize}
     $\Nc'$ has a more complex formula, so we provide an algorithm to derive it from $f$
     and $\Nc$ instead:
-    % I will write this with the pseudocode package at some point. This is just to check
-    % that everything works.
     \begin{enumerate}
         \item %HUH. there is something EFSL can encode that FSL cannot: the fact that some
         % labels are excluded by the function f. I cannot encode, for example,
