@@ -105,23 +105,13 @@
       \field{number}{5}
       \field{shortjournal}{Distrib. Comput.}
       \field{title}{Sublogarithmic Distributed {{MIS}} Algorithm for Sparse Graphs Using {{Nash-Williams}} Decomposition}
-      \field{urlday}{16}
-      \field{urlmonth}{9}
-      \field{urlyear}{2025}
       \field{volume}{22}
       \field{year}{2010}
       \field{dateera}{ce}
-      \field{urldateera}{ce}
       \field{pages}{363\bibrangedash 379}
       \range{pages}{17}
       \verb{doi}
       \verb 10.1007/s00446-009-0088-2
-      \endverb
-      \verb{urlraw}
-      \verb https://doi.org/10.1007/s00446-009-0088-2
-      \endverb
-      \verb{url}
-      \verb https://doi.org/10.1007/s00446-009-0088-2
       \endverb
     \endentry
     \entry{chang_time_2017}{inproceedings}{}
@@ -151,26 +141,21 @@
       \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.DC}
+      \field{eprinttype}{arxiv}
       \field{eventtitle}{2017 {IEEE} 58th Annual Symposium on Foundations of Computer Science ({FOCS})}
       \field{isbn}{978-1-5386-3464-6}
       \field{month}{10}
       \field{title}{A Time Hierarchy Theorem for the {LOCAL} Model}
-      \field{urlday}{11}
-      \field{urlmonth}{8}
-      \field{urlyear}{2025}
       \field{year}{2017}
       \field{dateera}{ce}
-      \field{urldateera}{ce}
       \field{pages}{156\bibrangedash 167}
       \range{pages}{12}
       \verb{doi}
       \verb 10.1109/FOCS.2017.23
       \endverb
-      \verb{urlraw}
-      \verb http://ieeexplore.ieee.org/document/8104055/
-      \endverb
-      \verb{url}
-      \verb http://ieeexplore.ieee.org/document/8104055/
+      \verb{eprint}
+      \verb 1704.06297
       \endverb
     \endentry
     \entry{balliuDistributedColoringPlays2022}{inproceedings}{}
@@ -219,22 +204,12 @@
       \field{month}{6}
       \field{series}{{{STOC}} 2022}
       \field{title}{Distributed $\Delta$-Coloring Plays Hide-and-Seek}
-      \field{urlday}{16}
-      \field{urlmonth}{9}
-      \field{urlyear}{2025}
       \field{year}{2022}
       \field{dateera}{ce}
-      \field{urldateera}{ce}
       \field{pages}{464\bibrangedash 477}
       \range{pages}{14}
       \verb{doi}
       \verb 10.1145/3519935.3520027
-      \endverb
-      \verb{urlraw}
-      \verb https://doi.org/10.1145/3519935.3520027
-      \endverb
-      \verb{url}
-      \verb https://doi.org/10.1145/3519935.3520027
       \endverb
     \endentry
   \enddatalist

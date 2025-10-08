@@ -43,12 +43,13 @@ output labels. Additionally, we assume there is a finite integer $c$ such that e
 is assigned a unique ID in the set $\Set{1,\ldots,n^c}$, but the nodes are not aware of
 the value of $c$.
 
-\textbf{Solvability:} we say that a problem is \emph{weakly unsolvable} if there are
-finitely many unsolvable instances for it. We will treat weakly unsolvable problems as
-solvable problems by adding one output label $U$ and requiring the problem to output $U$
+\textbf{Solvability:} we say that a problem is \emph{weakly solvable} if there are
+finitely many unsolvable instances for it (this includes problems that are always
+solvable). We can, and often will, treat weakly solvable problems as solvable problems by 
+implictly adding one output label $U$ and requiring the problem to output $U$
 on all nodes if the instance is unsolvable; this requires only constant time, so it does
 not affect asymptotic complexity. We call the maximum diameter of an unsolvable instance
-the \emph{solvability horizon} of the weakly unsolvable problem. We say that a problem is
+the \emph{solvability horizon} of a weakly solvable problem. We say that a problem is
 \emph{strongly unsolvable} if there are infinitely many unsolvable instances for it.
 %note: some further nuance could be given for "infinitely many solvable and unsolvable
 %instances" eg, 2 colouring on cycles, but it is not relevant to the work I want to put in
@@ -57,19 +58,38 @@ the \emph{solvability horizon} of the weakly unsolvable problem. We say that a p
 %think there are none in LCLs but could be wrong).
 
 \textbf{LCL problems:} we define LCL problems as tuples
-$\Pi=(\Sigma\uin,\Sigma\uout,r,\mathcal{C})$ where:
+$\Pi=(\Delta,\Sigma\uin,\Sigma\uout,r,\Cc)$ where:
 \begin{itemize}
+    \item $\Delta$ is a natural number, representing the maximum degree of the graph class considered,
     \item $\Sigma\uin$ is a set of input labels,
     \item $\Sigma\uout$ is a set of output labels,
     \item $r$ is a finite integer, called the \emph{radius} of $\Pi$, and
-    \item $\mathcal{C}$ is a \emph{finite} set of $r$-hop centered neighbourhoods, where
-    each node is labelled by a pair in $\Sigma\uin\times\Sigma\uout$.
+    \item $\Cc$ is a \emph{finite} set of $r$-hop centered neighbourhoods of
+    maximum degree $\Delta$, where each node is labelled by a pair in 
+    $\Sigma\uin\times\Sigma\uout$.
 \end{itemize}
 Though we haven't explicitly stated this in the definition, WLOG we can and will also
-assume that $\Sigma\uin$ is finite (else the problem would be strongly unsolvable) and
-that $\Sigma\uout$ is finite (any labels that don't appear in $\mathcal{C}$ will not
-appear in any valid solution and can be ignored).
+assume that $\Sigma\uin$ is finite (else the problem would be trivially strongly unsolvable, since
+only finitely many input labels appear in $\Cc$) and that $\Sigma\uout$ is finite
+(any labels that don't appear in $\Cc$ will not appear in any valid solution and can be ignored).
 %instance and solution as usual.
+
+\textbf{Node-edge checkable problems:}
+we define node-edge checkable problems as tuples 
+$\Pi=(\Delta,\Sigma\uin,\Sigma\uout,\Cc)$ where:
+\begin{itemize}
+    \item $\Delta$ is a natural number, representing the maximum degree of the graph class considered,
+    \item $\Sigma\uin$ is a set of input labels,
+    \item $\Sigma\uout$ is a set of output labels,
+    \item $r$ is a finite integer, called the \emph{radius} of $\Pi$, and
+    \item $\Cc$ is an indexed set $\Set{\Cc_{d,\chi}}_{d\leq\Delta,\chi\in\Sigma\uin}$
+    where each $\Cc_{d,\chi}$ is a subset of $\Sigma\uout^{\MSet{d}}$ (representing the
+    set of allowed configurations for a node of degree $d$ with input label $\chi$).
+\end{itemize}
+Similar reasoning to the above as to why we can implictly assume that $\Sigma\uin$ and
+$\Sigma\uout$ are finite sets. 
+
+
 \subsection{New-ish definitions}
 %these are definitions that have appeared before (cited) but are not "commonly used" as
 %far as I could tell or are natural variants of common definitions
@@ -83,7 +103,8 @@ one hook \emph{ornaments} and hanging trees with two hooks \emph{tinsels}.
 the \emph{class} of $T$ to be the set $\mathfrak{Cl}(T)\subseteq \Sigma\uout$ containing
 exactly the labellings of the hook that can be completed to a valid labelling for $T$
 according to $\Pi$. Up to the changed role of nodes and edges, this is the \emph{class}
-definition from Section 3 of \cite{chang_time_2017}.
+definition from Section 3 of \cite{chang_time_2017}. Note that since $\Sigma\uout$ is
+finite, so is the set of all possible classes.
 %I have been calling them types, but chang-pettie calls them classes and uses types for
 %paths... I'm trying to stick to classes but there might be mistakes TODO classes for
 %ornaments/general hanging trees. Mostly concerned about keeping track of which label goes
@@ -193,6 +214,66 @@ represented configuration $(R,F)$ with the configurations $\Set{R\cup\MSet{x}\dv
 
 
 \section{Proofs} 
+\subsection{Old(er) proofs that I finally formalised}
+\subsubsection{Solvability}
+\begin{thm}
+Let $\Pi$ be a node-edge checkable problem. Then it is possible to decide
+whether $\Pi$ is strongly unsolvable or weakly solvable on trees and compute the 
+solvability horizon. %in what time?
+\end{thm}
+\begin{proof}
+    Let $\Pi=(\Delta,\Sigma\uin,\Sigma\uout,\Cc)$. Let $\mathcal{T}^1_{\Delta}$ be the set of all
+    ornaments of maximum degree $\Delta$: this is a countably infinite set, but
+    $\mathfrak{Cl}(\mathcal{T}^1_{\Delta})$ is a finite set since it is a subset of
+    $2^{\Sigma\uout}$. We want to classify the possible classes of ornaments for the
+    problem $\Pi$ in three sets: classes that appear infinitely many times in the image of
+    $\mathfrak{Cl}$, classes that appear finitely many times, and classes that never
+    appear at all.
+\end{proof}
+\begin{thm}
+Let $\Pi$ be a FSL problem. Then it is possible to decide
+whether $\Pi$ is strongly unsolvable or weakly solvable and compute the solvability
+horizon (if it exists). %in what time?
+\end{thm}
+\section{What do we know about the complexity landscape?}
+\subsection{Trees}
+\input{Pictures/Trees}
+\subsection{General graphs}
+
+\pagebreak
+\printbibliography[ heading=bibintoc, title={Bibliography}]
+\end{document}
+
+
+
+
+
+
+
+
+%% OLD STUFF I REMOVED generally ignore anything below here
+
+%star/filling boxes problem leaf/branch label for a constraint hanging tree types
+
+\pagebreak
+\section{The very rough idea}
+I have the following algorithms:
+\begin{itemize}
+    \item \textsf{Hanger} finds all possible hanging tree types, as well as keeping track
+    of which ones are only finite and which are not.
+    \item \textsf{Path} decides whether a node-edge checkable problem on paths with input
+    labels is: 
+\begin{itemize}
+    \item weakly solvable with complexity $O(\log n)$
+    \item weakly solvable with complexity $\Theta(n)$
+    \item strongly unsolvable
+\end{itemize}    
+\end{itemize} 
+I want to use them to decide the complexity of a $\Omega(\log n)$ node-edge checkable
+problem on bounded degree trees. Plan: use rake-and-compress, solving path problems as you
+go, keeping the global ones out. if you can do it till the end, it's O(log n) if you get a
+forced global immediately it's O(n) if you do it after k steps it's O(n 1/k).
+
 \subsection{Equivalence of EFSL and FSL}
 In this section, we show that the EFSL and FSL can encode the same problems. 
 \begin{thm}
@@ -246,36 +327,3 @@ $(\card{\Sigma\uin}+1)$-hop neighbourhood. To make sure
         % 2col is one such example)
     \end{enumerate}
 \end{proof}
-
-\section{What do we know about the complexity landscape?}
-\subsection{Trees}
-\input{Pictures/Trees}
-\subsection{General graphs}
-
-\pagebreak
-\printbibliography[ heading=bibintoc, title={Bibliography}]
-\end{document}
-
-
-%% OLD STUFF I REMOVED generally ignore anything below here
-
-%star/filling boxes problem leaf/branch label for a constraint hanging tree types
-
-\pagebreak
-\section{The very rough idea}
-I have the following algorithms:
-\begin{itemize}
-    \item \textsf{Hanger} finds all possible hanging tree types, as well as keeping track
-    of which ones are only finite and which are not.
-    \item \textsf{Path} decides whether a node-edge checkable problem on paths with input
-    labels is: 
-\begin{itemize}
-    \item weakly solvable with complexity $O(\log n)$
-    \item weakly solvable with complexity $\Theta(n)$
-    \item strongly unsolvable
-\end{itemize}    
-\end{itemize} 
-I want to use them to decide the complexity of a $\Omega(\log n)$ node-edge checkable
-problem on bounded degree trees. Plan: use rake-and-compress, solving path problems as you
-go, keeping the global ones out. if you can do it till the end, it's O(log n) if you get a
-forced global immediately it's O(n) if you do it after k steps it's O(n 1/k).
