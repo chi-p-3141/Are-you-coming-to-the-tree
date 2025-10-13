@@ -76,15 +76,17 @@ only finitely many input labels appear in $\Cc$) and that $\Sigma\uout$ is finit
 
 \textbf{Node-edge checkable problems:}
 we define node-edge checkable problems as tuples 
-$\Pi=(\Delta,\Sigma\uin,\Sigma\uout,\Cc)$ where:
+$\Pi=(\Delta,\Sigma\uin,\Sigma\uout,\Nc,\Ec)$ where:
 \begin{itemize}
     \item $\Delta$ is a natural number, representing the maximum degree of the graph class considered,
     \item $\Sigma\uin$ is a set of input labels,
     \item $\Sigma\uout$ is a set of output labels,
     \item $r$ is a finite integer, called the \emph{radius} of $\Pi$, and
-    \item $\Cc$ is an indexed set $\Set{\Cc_{d,\chi}}_{d\leq\Delta,\chi\in\Sigma\uin}$
-    where each $\Cc_{d,\chi}$ is a subset of $\Sigma\uout^{\MSet{d}}$ (representing the
-    set of allowed configurations for a node of degree $d$ with input label $\chi$).
+    \item $\Nc$ is an indexed set $\Set{\Nc_{d,\chi}}_{d\leq\Delta,\chi\in\Sigma\uin}$
+    where each $\Nc_{d,\chi}$ is a subset of $\Sigma\uout^{\MSet{d}}$ (representing the
+    set of allowed configurations for a node of degree $d$ with input label $\chi$),
+    \item $\Ec$ is a subset of $\Sigma\uout^{\MSet{2}}$ (representing the set of allowed
+    configurations over edges).
 \end{itemize}
 Similar reasoning to the above as to why we can implictly assume that $\Sigma\uin$ and
 $\Sigma\uout$ are finite sets. 
@@ -95,12 +97,18 @@ $\Sigma\uout$ are finite sets.
 %far as I could tell or are natural variants of common definitions
 \textbf{Hanging trees:} \emph{connected} tree graphs containing a finite number of
 incomplete half-edges, called \emph{hooks}. Specifically, we will call hanging trees with
-one hook \emph{ornaments} and hanging trees with two hooks \emph{tinsels}.
+one hook \emph{ornaments} and hanging trees with two hooks \emph{tinsels}. We call nodes
+adjacent to one or more hooks \emph{hinge nodes}.
 % I'm using christmasy terms for things because they make a nice and intuitive visual, but
 % also because "hanging trees" could have... a different connotation.
 
-\textbf{Class:} given an ornament $T$ and a node-edge checkable problem $\Pi$, we define
-the \emph{class} of $T$ to be the set $\mathfrak{Cl}(T)\subseteq \Sigma\uout$ containing
+\textbf{Hanging tree sets:} we define as $\Tc_{k,\Delta}$ the set of all hanging trees
+with $k$ hooks and maximum degree $\Delta$. Additionally, we define
+$\Tc_k=\bigcup_{\Delta\in\N}\Tc_{k,\Delta}$ as the set of all hanging trees with $k$
+hooks. Note that both are countably infinite sets.
+
+\textbf{Class:} given an ornament $T$ and a node-edge checkable problem or FSL problem $\Pi$, we define 
+the \emph{class} of $T$ to be the set $\frCl(T)\subseteq \Sigma\uout$ containing
 exactly the labellings of the hook that can be completed to a valid labelling for $T$
 according to $\Pi$. Up to the changed role of nodes and edges, this is the \emph{class}
 definition from Section 3 of \cite{chang_time_2017}. Note that since $\Sigma\uout$ is
@@ -222,13 +230,60 @@ whether $\Pi$ is strongly unsolvable or weakly solvable on trees and compute the
 solvability horizon. %in what time?
 \end{thm}
 \begin{proof}
-    Let $\Pi=(\Delta,\Sigma\uin,\Sigma\uout,\Cc)$. Let $\mathcal{T}^1_{\Delta}$ be the set of all
-    ornaments of maximum degree $\Delta$: this is a countably infinite set, but
-    $\mathfrak{Cl}(\mathcal{T}^1_{\Delta})$ is a finite set since it is a subset of
-    $2^{\Sigma\uout}$. We want to classify the possible classes of ornaments for the
-    problem $\Pi$ in three sets: classes that appear infinitely many times in the image of
-    $\mathfrak{Cl}$, classes that appear finitely many times, and classes that never
-    appear at all.
+    We include the definitions of B-hypergraph, simple hyperpath and B-hyperpath from
+    \cite[Chapter 2]{thakurLinearConnectivityProblems2009} and \cite[Definition 2.4]{ausielloOptimalTraversalDirected1997}
+
+//TODO copy them
+
+    Let $\Pi=(\Delta,\Sigma\uin,\Sigma\uout,\Nc,\Ec)$, we show that there is a way 
+    to compute the set $\frCl(\Tc_{1,\Delta})$ for $\Pi$ in
+    finite time. To do so, we construct the \emph{existential graph of classes} of $\Pi$,
+    which is a directed B-hypergraph we denote with $G^{Cl}_{\Pi}$ and define as follows:
+    \begin{itemize}
+        \item the set of nodes of $G^{Cl}_{\Pi}$ is $\Pow(\Sigma\uout)$,
+        \item there is an edge from $\Set{Cl_1,\ldots,Cl_k}$ to $Cl$ if and only if one of
+        the following applies:
+        \begin{enumerate}[(A)]
+            \item there is a hanging tree of class $Cl$ whose set of sub-hanging trees
+            (meaning, the hanging trees obtained by removing the hook node and all of its
+            adjacent half-edges) is exactly $\Set{Cl_1,\ldots,Cl_k}$, or
+            \item $k=2,Cl=\emptyset$ and $(Cl_1\times Cl_2)\cap \Ec = \emptyset$.
+        \end{enumerate}
+        \item Additionally, we mark the nodes corresponding to
+        $\Set{\Nc_{1,\chi}}_{\chi\in\Sigma\uin}$ as \airquotes{starting} nodes.
+    \end{itemize}
+    The proof then roughly goes as follows: we show that an algorithm exists that builds
+    this hypergraph in finite time $[\bigstar 1]$, and we show that we can compute the solvability
+    horizon of $\Pi$ by traversing it $[\bigstar 2]$.
+    % I want to make these clickable with cref but leaving that for later.
+
+    $[\bigstar 1]$ First, we initialise the graph with the node set and the edges of type
+    (B), which can be done in time $O(2^{\card{\Sigma\uout}})$ by iterating over the
+    powerset. To find the edges of type (A) we define a set of \emph{reached classes}
+    which we initialise as the set of starting nodes
+    $\Set{\Nc_{1,\chi}}_{\chi\in\Sigma\uin}$; then we iterate over all the ornaments
+    of depth 1 (ie containing only the hook node and leaves) and max degree $\Delta$, over
+    all elements of $\Sigma\uin$ as input labels to the hook node, and over all
+    combinations of elements of $\Cc$ over the leaves. Note that there are finitely many
+    such labelled trees.
+    
+    Now, we compute the class of each
+    ornament as if it were an instance of $\Pi$ on the hook node, with the leaves
+    accepting only and all of the labels in their input label. Every time we do this, we
+    add the class to a set $\mathcal{U}$ and add an edge in $G^{Cl}_{\Pi}$ from the labels that appear on to the node corresponding
+    to the class; if this edge already exists, we can skip this step. For convenience, if
+    we are adding a new edge, we can store the tree we were considering as a label to it.
+
+    At the end of this iteration, we check whether $\mathcal{U}\subseteq\Cc$; in this
+    case, we stop. If $\mathcal{U}\nsubseteq\Cc$ we repeat the process by setting
+    $\Cc':=\Cc\cup\mathcal{U}$. This means $\card{\Cc'}\geq\card{\Cc}+1$; since
+    $\Cc',\Cc\subseteq\Pow(\Sigma\uout)$ the process has to terminate in at most
+    $2^{2^{\card{\Sigma\uout}}}$ repetitions.
+
+    To show that this algorithm is correct, observe that //TODO finish: it's a simple
+    inductive argument on the maxdepth.
+
+    $[\bigstar 2]$ 
 \end{proof}
 \begin{thm}
 Let $\Pi$ be a FSL problem. Then it is possible to decide
@@ -253,7 +308,31 @@ horizon (if it exists). %in what time?
 
 %% OLD STUFF I REMOVED generally ignore anything below here
 
+% automata based definition for thm 4.1, removed since I'm not really using anything that
+% I couldn/t describe in graph language.
+
+We do so by constructing a nondeterministic finite semiautomaton $\Mc_{\Pi}$
+    over the unary alphabet $\Sigma=\Set{\epsilon}$ following roughly similar steps to
+    \cite{changDistributedGraphProblems2023}. Explicitly, we construct $\Mc_{\Pi}$ as
+    follows:
+    \begin{itemize}
+        \item The set of states is $\Pow(\Sigma\uout)$.
+        \item There is a transition from $Cl_1$ to $Cl_2$ if there is a hanging tree of class
+        $Cl_2$ containing a hanging tree of class $Cl_1$ as a child of the hinge node.
+        %this might need a diagram
+        \item The only starting state is the set of all possible labels that a leaf will accept.
+        \item The automaton has no accepting state.
+    \end{itemize}    
+
+
 %star/filling boxes problem leaf/branch label for a constraint hanging tree types
+
+\textbf{Class certificate:} given a node-edge checkable problem or FSL problem $\Pi$ and a
+class $Cl\subseteq\Sigma\uout$, we want to classify classes based on how 
+
+\textbf{Class set:} given a node-edge checkable problem or FSL problem $\Pi$, we define
+its \emph{class set} as
+$$\frCl(\Pi):=\Set{(Cl,b,\Tc)\dv Cl\subseteq\Sigma\uout,b=\begin{cases}0&\text{if }\end{cases}} $$
 
 \pagebreak
 \section{The very rough idea}
@@ -310,7 +389,8 @@ $(\card{\Sigma\uin}+1)$-hop neighbourhood. To make sure
     We define $\Pi'=(\Sigma\uout',\Nc',\Ec')$
     as:
     \begin{itemize}
-        \item $\Sigma\uout'=\Sigma\uout\cup \Sigma_I$, where $\Sigma_I:=\Set{(I,n)\dv n\in\Sigma\uin}\cup\Set{(I,L),(I,Err),Err}$,
+        \item $\Sigma\uout'=\Sigma\uout\cup \Sigma_I$, where $\Sigma_I:=\Set{(I,n)\dv
+        n\in\Sigma\uin}\cup\Set{(I,L),(I,Err),Err}$,
         \item $\Ec'=\Ec\cup\Set{\MSet{X,X}\dv X\in \Sigma_I}$ (every edge containing the
         new input labels is symmetric).
     \end{itemize}

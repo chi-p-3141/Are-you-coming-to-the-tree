@@ -73,6 +73,87 @@
       \verb https://www.wisdom.weizmann.ac.il/~naor/PAPERS/lcl.pdf
       \endverb
     \endentry
+    \entry{ausielloOptimalTraversalDirected1997}{article}{}
+      \name{author}{3}{}{%
+        {{hash=9ba828bbcd3dac7cad73a3284ea5d8a3}{%
+           family={Ausiello},
+           familyi={A\bibinitperiod},
+           given={Giorgio},
+           giveni={G\bibinitperiod}}}%
+        {{hash=2dbecaf0b058bbd6aaac1d59005bcad1}{%
+           family={Giaccio},
+           familyi={G\bibinitperiod},
+           given={Roberto},
+           giveni={R\bibinitperiod}}}%
+        {{hash=eab05681f912bae22a7afce458c4b616}{%
+           family={Nanni},
+           familyi={N\bibinitperiod},
+           given={Umberto},
+           giveni={U\bibinitperiod}}}%
+      }
+      \strng{namehash}{189e97e02bbbb86e40db4234304faecb}
+      \strng{fullhash}{189e97e02bbbb86e40db4234304faecb}
+      \strng{bibnamehash}{189e97e02bbbb86e40db4234304faecb}
+      \strng{authorbibnamehash}{189e97e02bbbb86e40db4234304faecb}
+      \strng{authornamehash}{189e97e02bbbb86e40db4234304faecb}
+      \strng{authorfullhash}{189e97e02bbbb86e40db4234304faecb}
+      \field{labelalpha}{AGN97}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{24}
+      \field{month}{11}
+      \field{title}{Optimal {{Traversal}} of {{Directed Hypergraphs}}}
+      \field{year}{1997}
+      \field{dateera}{ce}
+      \verb{urlraw}
+      \verb https://www.researchgate.net/publication/2455024_Optimal_Traversal_of_Directed_Hypergraphs
+      \endverb
+      \verb{url}
+      \verb https://www.researchgate.net/publication/2455024_Optimal_Traversal_of_Directed_Hypergraphs
+      \endverb
+    \endentry
+    \entry{thakurLinearConnectivityProblems2009}{article}{}
+      \name{author}{2}{}{%
+        {{hash=8d8de1a6f58e6c2bd3fb930f9d44e6ad}{%
+           family={Thakur},
+           familyi={T\bibinitperiod},
+           given={Mayur},
+           giveni={M\bibinitperiod}}}%
+        {{hash=228ab1b54de583ea8c40dbdb7bcd6a57}{%
+           family={Tripathi},
+           familyi={T\bibinitperiod},
+           given={Rahul},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{6cfa99bde03738deab9b2e591640c023}
+      \strng{fullhash}{6cfa99bde03738deab9b2e591640c023}
+      \strng{bibnamehash}{6cfa99bde03738deab9b2e591640c023}
+      \strng{authorbibnamehash}{6cfa99bde03738deab9b2e591640c023}
+      \strng{authornamehash}{6cfa99bde03738deab9b2e591640c023}
+      \strng{authorfullhash}{6cfa99bde03738deab9b2e591640c023}
+      \field{labelalpha}{TT09}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{28}
+      \field{issn}{0304-3975}
+      \field{journaltitle}{Theoretical Computer Science}
+      \field{month}{6}
+      \field{number}{27}
+      \field{shortjournal}{Theoretical Computer Science}
+      \field{title}{Linear Connectivity Problems in Directed Hypergraphs}
+      \field{volume}{410}
+      \field{year}{2009}
+      \field{dateera}{ce}
+      \field{pages}{2592\bibrangedash 2618}
+      \range{pages}{27}
+      \verb{doi}
+      \verb 10.1016/j.tcs.2009.02.038
+      \endverb
+    \endentry
     \entry{barenboimSublogarithmicDistributedMIS2010}{article}{}
       \name{author}{2}{}{%
         {{hash=82139fd6333c09f50208cf3610b9354d}{%

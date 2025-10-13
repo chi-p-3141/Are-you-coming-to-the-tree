@@ -1,15 +1,15 @@
 # Fdb version 4
-["biber Logs/main"] 0 "Logs/main.bcf" "Logs/main.bbl" "Logs/main" 1759932325.22719 -1
-  "Logs/main.bcf" 1759932325.17273 108484 ebcc90a65bf86c9dfc04aa854b0f7e02 "pdflatex"
-  "ref.bib" 1759924414.00027 2077 999c281a3f72c948f528722cb65bef2a ""
+["biber Logs/main"] 1760369373.95765 "Logs/main.bcf" "Logs/main.bbl" "Logs/main" 1760369376.32962 0
+  "Logs/main.bcf" 1760369376.27538 108668 1332bab6e7c22f238743ff8d9b5cba16 "pdflatex"
+  "ref.bib" 1760367307.27687 3287 fc106cf4c6e8d3d9bfb73fab1584a665 ""
   (generated)
   "Logs/main.bbl"
   "Logs/main.blg"
   (rewritten before read)
-["pdflatex"] 1759932324.35106 "/home/c01chpi/Documents/LaTeX projects/Are-you-coming-to-the-tree/main.tex" "Logs/main.pdf" "main" 1759932325.22742 0
+["pdflatex"] 1760369375.45388 "/home/c01chpi/Documents/LaTeX projects/Are-you-coming-to-the-tree/main.tex" "Logs/main.pdf" "main" 1760369376.32987 0
   "/etc/texmf/web2c/texmf.cnf" 1757927802.37084 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/c01chpi/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk" 1757929701.47391 14040 496ec4c174930d4613af579b16e57cd1 ""
-  "/home/c01chpi/Documents/LaTeX projects/Are-you-coming-to-the-tree/main.tex" 1759932323.36575 17939 876e62e356e709cdeb7649b2afde19e0 ""
+  "/home/c01chpi/Documents/LaTeX projects/Are-you-coming-to-the-tree/main.tex" 1760369372.95335 22499 117b6aeee0880985b60f359480b2701a ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm" 1136768653 1536 74b7293ec3713bb7fdca8dd1bd1f469c ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -45,10 +45,12 @@
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb" 1248133631 32734 69e00a6b65cedb993666e42eedb3d48f ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1248133631 32726 0a1aea6fcd6468ee2cf64d891f5c43c8 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
+  "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb" 1248133631 32587 1788b0c1c5b39540c96f5e42ccd6dae8 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1248133631 32626 4f5c1b83753b1dd3a97d1b399a005b4b ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb" 1248133631 36118 fad905eba93cff5bce1e185fe980a177 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb" 1248133631 24252 1e4e051947e12dfb50fee0b7f4e26e3a ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb" 1336858727 21098 d4aee7c0aac232caac5688b586b9363c ""
+  "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb" 1248133631 31764 459c573c03a4949a528c2cc7f557e217 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb" 1248133631 34694 ad62b13721ee8eda1dcc8993c8bd7041 ""
   "/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1461363279 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/share/texlive/texmf-dist/tex/generic/atbegshi/atbegshi.sty" 1575674566 24708 5584a51a7101caf7e6bbf1fc27d8f7b1 ""
@@ -213,14 +215,14 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1757927807.34077 165012 f177baa1c39a3ebd62c3096a43521a0d ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1757927827 6831000 02f335624e334c0146418432e05f2454 ""
-  "Logs/main.aux" 1759932325.17073 7380 204de9cb991b997ed1bbfea5fb6c2bae "pdflatex"
-  "Logs/main.bbl" 1759931446.22571 7770 f2ecfe7cd4f9525fc9aa52a13bac0686 "biber Logs/main"
-  "Logs/main.run.xml" 1759932325.17487 2304 925243a3b7d6ea26edfd3e4afcba2072 "pdflatex"
+  "Logs/main.aux" 1760369376.27338 7796 5057e70d06bb16eafb5f56c21fd1b0c7 "pdflatex"
+  "Logs/main.bbl" 1760369374.54226 10973 1df5e77189b0fa2ba69aa96963bd210a "biber Logs/main"
+  "Logs/main.run.xml" 1760369376.27653 2304 925243a3b7d6ea26edfd3e4afcba2072 "pdflatex"
   "Pictures/Trees" 1758545486.87651 782 3fcb302e2c0ddedef2e162098fec8b49 ""
-  "Preamble/commands.tex" 1759924413.99917 2004 f98f59d3bfaaac029646159198469b30 ""
+  "Preamble/commands.tex" 1760003768.22579 2118 389941c7e9354f4e0936abd5e5fd2738 ""
   "Preamble/comp_line.tex" 1758545486.87651 4543 0b093dc6811cc936b79dfbcbad66f632 ""
   "Preamble/packages.tex" 1758545486.87651 729 8c4b7485e9808a00d04931730d503f60 ""
-  "main.tex" 1759932323.36575 17939 876e62e356e709cdeb7649b2afde19e0 ""
+  "main.tex" 1760369372.95335 22499 117b6aeee0880985b60f359480b2701a ""
   (generated)
   "Logs/main.aux"
   "Logs/main.bcf"
