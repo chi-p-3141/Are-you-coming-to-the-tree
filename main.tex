@@ -48,9 +48,11 @@ finitely many unsolvable instances for it (this includes problems that are alway
 solvable). We can, and often will, treat weakly solvable problems as solvable problems by 
 implictly adding one output label $U$ and requiring the problem to output $U$
 on all nodes if the instance is unsolvable; this requires only constant time, so it does
-not affect asymptotic complexity. We call the maximum diameter of an unsolvable instance
-the \emph{solvability horizon} of a weakly solvable problem. We say that a problem is
-\emph{strongly unsolvable} if there are infinitely many unsolvable instances for it.
+not affect asymptotic complexity. We say that a problem is
+\emph{strongly unsolvable} if there are infinitely many unsolvable instances for it. We
+call the maximum diameter of an unsolvable instance the \emph{solvability horizon} of a
+weakly solvable problem; if the problem is always solvable, we define it as 0, and if it
+is strongly unsolvable, we define it as $\infty$.
 %note: some further nuance could be given for "infinitely many solvable and unsolvable
 %instances" eg, 2 colouring on cycles, but it is not relevant to the work I want to put in
 %here. similarly, "verifiably unsolvable" for infinitely many unsolvable instances that
@@ -224,45 +226,71 @@ represented configuration $(R,F)$ with the configurations $\Set{R\cup\MSet{x}\dv
 \section{Proofs} 
 \subsection{Old(er) proofs that I finally formalised}
 \subsubsection{Solvability}
+We include definitions of B-hypergraph, B-hyperpath and hyperpath tree based on
+\cite{thakurLinearConnectivityProblems2009} and \cite[Section 2]{ausielloOptimalTraversalDirected1997}
+\begin{definition}{\cite[Definition 2.2]{thakurLinearConnectivityProblems2009}}
+        A \emph{directed hypergraph} $H$ is a pair $(V , E)$, where V is a finite set and $E
+        \subseteq 2^V \times 2^V$ such that, for every $e=(T(e),H(e))\in E,
+        T(e)\neq\emptyset, H(e)\neq\emptyset$, and $T(e)\cap H(e)=\emptyset$. A
+        B-hyperedge is a hyperedge e = (T (e), H(e)) such that $\card{H(e)} = 1$; a
+        directed B-hypergraph is a directed hypergraph H such that each hyperedge in H is
+        a B-hyperedge.
+    \end{definition}
+    \begin{definition}{\cite[Definition 2.4]{ausielloOptimalTraversalDirected1997}}
+        Let $H=(V,E)$ be a directed B-hypergraph, let $X\subseteq V$ be a non-empty subset
+        of nodes and $t$ be a node in $V$. There is a \emph{B-hyperpath} from $X$ to $t$ in $V$
+        if $y\in X$, or there is an hyperedge $e=(Z,\Set{y})$ such that there is a
+        B-hyperpath from $X$ to each $z_i\in Z$.
+    \end{definition}
+    \begin{definition}{\cite[Definition 2.5]{ausielloOptimalTraversalDirected1997}}
+        Let $H=(V,E)$ be a directed B-hypergraph, let $X\subseteq V$ be a non-empty subset
+        of nodes and $t$ be a node in $V$ such that there is a B-hyperpath from $X$ to
+        $t$. A \emph{hyperpath tree} is a tree $T_{X,t}$ defined as follows:
+        \begin{itemize}
+            \item if $t\in X$, $T_{X,t}$ is the empty tree,
+            \item if there is a hyperarc $e=(Z,t)$ and hyperpaths from $X$ to
+            each $z_i\in Z$, then $T_{X,t}$ consists of a root labelled $e$ having as
+            subtrees the hyperpath trees $T_{X,z_i}$ for each $z_i\in Z$.
+        \end{itemize}
+    \end{definition}
+
 \begin{thm}
 Let $\Pi$ be a node-edge checkable problem. Then it is possible to decide
 whether $\Pi$ is strongly unsolvable or weakly solvable on trees and compute the 
 solvability horizon. %in what time?
 \end{thm}
 \begin{proof}
-    We include the definitions of B-hypergraph, simple hyperpath and B-hyperpath from
-    \cite[Chapter 2]{thakurLinearConnectivityProblems2009} and \cite[Definition 2.4]{ausielloOptimalTraversalDirected1997}
-
-//TODO copy them
-
-    Let $\Pi=(\Delta,\Sigma\uin,\Sigma\uout,\Nc,\Ec)$, we show that there is a way 
-    to compute the set $\frCl(\Tc_{1,\Delta})$ for $\Pi$ in
-    finite time. To do so, we construct the \emph{existential graph of classes} of $\Pi$,
-    which is a directed B-hypergraph we denote with $G^{Cl}_{\Pi}$ and define as follows:
+    Let $\Pi=(\Delta,\Sigma\uin,\Sigma\uout,\Nc,\Ec)$, we construct the \emph{existential graph of classes} of $\Pi$,
+    which is a directed B-hypergraph we denote with $H^{Cl}_{\Pi}$ and define as follows:
     \begin{itemize}
-        \item the set of nodes of $G^{Cl}_{\Pi}$ is $\Pow(\Sigma\uout)$,
-        \item there is an edge from $\Set{Cl_1,\ldots,Cl_k}$ to $Cl$ if and only if one of
-        the following applies:
-        \begin{enumerate}[(A)]
-            \item there is a hanging tree of class $Cl$ whose set of sub-hanging trees
+        \item the set of nodes of $H^{Cl}_{\Pi}$ is $\Pow(\Sigma\uout)$ with an extra node
+        labelled $\bot$,
+        \item there is an edge from $\Set{Cl_1,\ldots,Cl_k}$ to $Cl$ if and only if there is a hanging tree of class $Cl$ whose set of sub-hanging trees
             (meaning, the hanging trees obtained by removing the hook node and all of its
-            adjacent half-edges) is exactly $\Set{Cl_1,\ldots,Cl_k}$, or
-            \item $k=2,Cl=\emptyset$ and $(Cl_1\times Cl_2)\cap \Ec = \emptyset$.
-        \end{enumerate}
-        \item Additionally, we mark the nodes corresponding to
-        $\Set{\Nc_{1,\chi}}_{\chi\in\Sigma\uin}$ as \airquotes{starting} nodes.
+            adjacent half-edges) is exactly $\Set{Cl_1,\ldots,Cl_k}$ (type A),
+        \item there is an edge from $\Set{Cl_1,Cl_2}$ to $\bot$ if and only if $(Cl_1\times
+        Cl_2)\cap\Ec=\emptyset$\footnote{with a slight abuse of notation, we consider $Cl_1\times
+        Cl_2$ to be a multiset rather than an ordered pair.} (type B),
+        \item there are no other edges.
     \end{itemize}
+    Additionally, we mark the nodes corresponding to
+    $\Set{\Nc_{1,\chi}}_{\chi\in\Sigma\uin}$ as \airquotes{starting} nodes.
+    
     The proof then roughly goes as follows: we show that an algorithm exists that builds
-    this hypergraph in finite time $[\bigstar 1]$, and we show that we can compute the solvability
-    horizon of $\Pi$ by traversing it $[\bigstar 2]$.
+    $H^{Cl}_{\Pi}$ in finite time $[\bigstar 1]$, we show a relation between its
+    longest hyperpath trees and the solvability horizon of $\Pi$ $[\bigstar 2]$, and finally show
+    we can compute the longest hyperpath trees in finite time $[\bigstar 3]$.
     % I want to make these clickable with cref but leaving that for later.
 
     $[\bigstar 1]$ First, we initialise the graph with the node set and the edges of type
     (B), which can be done in time $O(2^{\card{\Sigma\uout}})$ by iterating over the
     powerset. To find the edges of type (A) we define a set of \emph{reached classes}
     which we initialise as the set of starting nodes
-    $\Set{\Nc_{1,\chi}}_{\chi\in\Sigma\uin}$; then we iterate over all the ornaments
-    of depth 1 (ie containing only the hook node and leaves) and max degree $\Delta$, over
+    $\Cc:=\Set{\Nc_{1,\chi}}_{\chi\in\Sigma\uin}$; if $\emptyset\in\Cc$, the problem is
+    strongly unsolvable and the solvability horizon is $\infty$. We assume this is not the case.
+    
+    Then, we iterate over all the ornaments
+    of height 1 (ie containing only the hook node and leaves) and max degree $\Delta$, over
     all elements of $\Sigma\uin$ as input labels to the hook node, and over all
     combinations of elements of $\Cc$ over the leaves. Note that there are finitely many
     such labelled trees.
@@ -270,7 +298,7 @@ solvability horizon. %in what time?
     Now, we compute the class of each
     ornament as if it were an instance of $\Pi$ on the hook node, with the leaves
     accepting only and all of the labels in their input label. Every time we do this, we
-    add the class to a set $\mathcal{U}$ and add an edge in $G^{Cl}_{\Pi}$ from the labels that appear on to the node corresponding
+    add the class to a set $\mathcal{U}$ and add an edge in $H^{Cl}_{\Pi}$ from the labels that appear on to the node corresponding
     to the class; if this edge already exists, we can skip this step. For convenience, if
     we are adding a new edge, we can store the tree we were considering as a label to it.
 
@@ -280,16 +308,65 @@ solvability horizon. %in what time?
     $\Cc',\Cc\subseteq\Pow(\Sigma\uout)$ the process has to terminate in at most
     $2^{2^{\card{\Sigma\uout}}}$ repetitions.
 
-    To show that this algorithm is correct, observe that //TODO finish: it's a simple
-    inductive argument on the maxdepth.
+    To show that this algorithm is correct, we show that every possible ornament is encoded in
+    the edges of type (A) by induction on the height $h$ (the maximum distance between the
+    hook node and a leaf). This is vacuously true for $h=0$, meaning single leaves which
+    do not have any sub-hanging tree; consider instead an ornament $H$ of height $h+1$. If
+    every one of its sub-hanging trees (of height $\leq h$) was previously encoded,
+    their classes were added $\Cc$ at some step. In the next step, we must have built an
+    ornament of height 1 with each leaf corresponding to one of these sub-trees and added
+    an edge encoding $H$ if it wasn't already present. Then $H$ is encoded, and by
+    induction, so are all finite ornaments; we denote as $f$ the function mapping
+    ornaments to their encoding edges.
 
-    $[\bigstar 2]$ 
+    $[\bigstar 2]$ We claim that the unsolvability horizon of $\Pi$ corresponds to the
+    maximum over the diameters of all hyperpath trees starting from the set $S$ of
+    starting/leaf nodes and ending in $\bot$. More precisely, we claim for each such \emph{finite}
+    hyperpath tree of diameter $d$ we can construct an unsolvable instance of diameter $d+1$ and for each
+    unsolvable instance of diameter $d+1$ we can construct a hyperpath tree of diameter
+    $d$.
+    
+    Let $T_{S,\bot}$ be a hyperpath tree from $S$ to $\bot$.
+    Since $\bot\notin S$, there is a set $\Set{Cl_1,Cl_2}$ such that:
+    \begin{itemize}
+        \item there are hyperpath trees from $S$ to $Cl_1,Cl_2$, and
+        \item $(Cl_1\times Cl_2)\cap\Ec=\emptyset$.
+    \end{itemize}
+    We traverse the hyperpath tree from $S$ to $Cl_1$; every time we traverse an hyperedge $h=(T,Cl)$,
+    we replace each node corresponding to the class $Cl$ in the previous ornament with
+    the ornament we labelled $h$ with. The result is an ornament $G_1$ of class $Cl_1$, of
+    diameter equal to the hypertree depth $+1$; we repeat this procedure to get an ornament $G_2$ of
+    class $Cl_2$. Then we join the two hooks of $G_1,G_2$ into a single edge $e$ to get a
+    tree $T$; since $(Cl_1\times Cl_2)\cap\Ec=\emptyset$ there is no valid labelling for $e$
+    and $T$ is an unsolvable instance of diameter equal to
+    $\text{depth}(G_1)+\text{depth}(G_2)+1=\text{diam}(T_{S,\bot})-1$.
+
+    Conversely, let $G$ be an unsolvable instance for $\Pi$ and let $e$ be any edge of $G$. Let
+    $G_1,G_2$ be the two ornaments obtained by splitting $e$ in half; since no label
+    assignment to $e$ would result in a solution, we have that
+    $(\frCl(G_1)\times\frCl(G_2))\cap\Ec=\emptyset$ and there is a hyperedge from
+    $\bot$ to $\Set{\frCl(G_1),\frCl(G_2)}$. From there, we can use the function $f$
+    described above to map $G_1$ to its encoding edge, and so on recursively to find a
+    hyperpath from the set of starting nodes to $\frCl(G_1)$ of length equal to
+    $\text{depth}(G_1)-1$. By repeating this procedure on $G_2$ we get a hyperpath from $S$ to $\bot$ corresponding to a hyperpath tree of diameter
+    $\text{depth}(G_1)-1+\text{depth}(G_2)-1+1=\text{diam}(G)+1$.
+
+    Finally, note that the proof above applies to finite hyperpath trees. If any hyperpath
+    from $S$ to $\bot$ contains a cycle, then we can find hyperpath trees of arbitrarily
+    large finite depth; then we can find unsolvable instances of arbitrarily
+    large depth, and $\Pi$ is strongly unsolvable (with a solvability horizon of $\infty$). Similarly, if no hyperpaths exist
+    between $S$ and $\bot$, then no unsolvable instances exist, and the solvability
+    horizon of $\Pi$ is zero. If at least one path exists and no paths contain cycles,
+    there are finitely many paths; we can iterate over all of them to obtain their maximum
+    diameter and the solvability horizon.\footnote{We are only concerned about finiteness
+    here; a discussion of the complexity of finding the longest hyperpath can be found in \cite{thakurLinearConnectivityProblems2009}}
 \end{proof}
 \begin{thm}
 Let $\Pi$ be a FSL problem. Then it is possible to decide
 whether $\Pi$ is strongly unsolvable or weakly solvable and compute the solvability
 horizon (if it exists). %in what time?
 \end{thm}
+\pagebreak
 \section{What do we know about the complexity landscape?}
 \subsection{Trees}
 \input{Pictures/Trees}
