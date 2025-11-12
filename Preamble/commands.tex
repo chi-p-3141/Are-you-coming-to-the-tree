@@ -9,7 +9,7 @@
 
 % delimiters
 \newcommand{\Set}[1]{\left\{#1\right\}}
-\newcommand{\MSet}[1]{\Set{\Set{#1}}}
+\newcommand{\MSet}[1]{\Set{\!\Set{#1}\!}}
 \newcommand{\dv}{\,\middle|\,}
 \DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
 \let\card\abs
@@ -36,6 +36,7 @@
 \newcommand{\airquotes}[1]{``#1''}
 \newcommand{\uin}{_{\text{in}}}
 \newcommand{\uout}{_{\text{out}}}
+\newcommand{\into}{\hookrightarrow}
 
 
 %% FORMAT
