@@ -22,7 +22,7 @@ of a set $A$:
 \begin{itemize}
     \item $A^{\MSet{k}}$ refers to the set of all multisubsets of $A$ of size $k\in\N$,
     \item $A^{\MSet{\N}}$ refers to the set of all finite multisubsets of $A$,
-    \item $A^{\MSet{\star}}$ refers to the set of all multisubsets of $A$.
+    \item $A^{\MSet{\star}}$ refers to the set of all multisubsets of $A$,
 \end{itemize}
 \subsection{Common and uncommon assumptions}
 %\airquotes{Unless otherwise \emph{explicitly} stated...}
@@ -130,14 +130,14 @@ have the same asymptotic locality/are equivalent if both apply:
 %this is a weaker definition than the one I gave in the binary labelling work, which
 %required a constant-locality reduction from \Pi_A to \Pi_B
 
-\textbf{LOCAL hierarchy of problem classes:} let $\mathcal{A},\mathcal{B}$ be classes of
-LOCAL problems. We say that $\mathcal{A}\into \mathcal{B}$ if there exists an injective function
-$\tau:\mathcal{A}\to\mathcal{B}$ such that $\forall \Pi_A\in\mathcal{A}\ \Pi_A$ has the
+\textbf{LOCAL hierarchy of problem classes:} let $\Ac,\mathcal{B}$ be classes of
+LOCAL problems. We say that $\Ac\into \mathcal{B}$ if there exists an injective function
+$\tau:\Ac\to\mathcal{B}$ such that $\forall \Pi_A\in\Ac\ \Pi_A$ has the
 same asymptotic locality as $\tau(\Pi_A)$.
 
-\textbf{LOCAL equivalence of problem classes:} let $\mathcal{A},\mathcal{B}$ be classes of
-LOCAL problems. We say that $\mathcal{A}$ is equivalent to $\mathcal{B}$ (denoted
-$\mathcal{A}\cong \mathcal{B}$) if $\mathcal{A}\into \mathcal{B}$ and $\mathcal{B}\into\mathcal{A}$.
+\textbf{LOCAL equivalence of problem classes:} let $\Ac,\mathcal{B}$ be classes of
+LOCAL problems. We say that $\Ac$ is equivalent to $\mathcal{B}$ (denoted
+$\Ac\cong \mathcal{B}$) if $\Ac\into \mathcal{B}$ and $\mathcal{B}\into\Ac$.
 %the injectivity is a debatable part; depending on whether one wants some real
 %correspondence between the classes or simply the same complexity classes
 
@@ -262,24 +262,48 @@ node can be in). For FSL problems we define it as $\card{\Nc}$.
     that $\Sigma\uin=\Set{1,\ldots,\card{\Sigma\uin}}$, then we define
     $\tau(\Pi)=(\Sigma\uout',\Nc',\Ec')$:
     \begin{itemize}
-        \item We extend $\Sigma\uout$ by an input error label $I_E$, a leaf label $I_L$,
-        and labels $I_i$ indexed by the input labels; formally,
-        $$\Sigma\uout'=\Sigma\uout\cup\Set{I_E,I_L}\cup\Set{I_i\dv i\in\Sigma\uin}$$
-        \item We define $\Nc'$ in four steps:
+        \item We extend $\Sigma\uout$ by a leaf label $I_L$, a path label $I_P$, labels $I_i$ indexed by the
+        input labels, and an input error label $I_E$; formally,
+        $$\Sigma\uout'=\Sigma\uout\cup\Set{I_L,I_E,I_P}\cup\Set{I_i\dv i\in\Sigma\uin}$$
+        \item We define $\Nc'$ step by step:
         \begin{enumerate}
             \item We initialise it as the disjoint union of the sets $\Nc(i)$ for
             $i\in\Sigma\uin$ indexed by an extra constraint $I_i$: formally,
             $$\Nc'_1=\Set{(\MSet{I_i}\cup R,F)\dv i\in\Sigma\uin, (R,F)\in \Nc(i)}$$
             \item We force the configurations in $\Nc'_1$ to only apply to nodes of degree
-            $\geq 4$ by appending leaf labels $I_L$ to both the requirement and the
-            filler: formally,
-            $$\Nc'_2=\Set{(,F\cup\MSet{I_L})\dv (R,F)\in\Nc'_1} $$
-            \item We allow nodes of degree $\geq 4$ who receive at least one error
+            $\geq 3$ by appending leaf labels $I_L$ to the requirement until it is of
+            length $\geq 3$ and adding $I_L$ to the possible filler labels: formally,
+            $$\Nc'_2=\Set{\phantom{\Big|}\!\!\!(R\cup L,F\cup\MSet{I_L})\!\dv\! (R,F)\in\Nc'_1,
+            L=\MSet{I_L,\ldots,I_L}, \abs{L}=\max\Set{0,3-\abs{R}}\!} $$
+            \item We use nodes of degree exactly 1 and 2 to encode input label $k$ as a hanging
+            path of length $k+1$; hanging paths of length $\geq\abs{\Sigma\uin}+1$ are represented
+            by the error input label $I_E$, isolated paths are represented by the path
+            label $I_P$. Formally,
+            \begin{align*}
+                \Nc'_3=\Nc'_2&\cup\Set{(\MSet{I_L},\emptyset),(\MSet{I_L,I_P},\emptyset),(\MSet{I_P,I_P},\emptyset),(\MSet{I_L,I_1},\emptyset)}\\
+                &\cup\Set{(\MSet{I_i,I_{i+1}},\emptyset)\dv i\in\Set{1,\ldots,\abs{\Sigma\uin}-1}}
+            \end{align*}
+            \item We allow nodes of degree $\geq 3$ who do not receive an input
+            label to output anything: formally,
+            $$\Nc'_4=\Nc'_3\cup\Set{(R,\Sigma\uout\cup\Set{I_L})\dv R\in
+            (\Sigma\uout\cup\Set{I_L})^{\MSet{3}}}$$
+            \item Similarly, we allow nodes of degree $\geq 3$ who receive an input error label
+            $I_E$ to output anything: formally,
+            $$\Nc'=\Nc'_4\cup\Set{\phantom{\Big|}\!\!\!(\MSet{I_E}\cup R,\Sigma\uout\cup\Set{I_L,I_E})\dv R\in
+            (\Sigma\uout\cup\Set{I_L,I_E})^{\MSet{2}}}$$
         \end{enumerate}
         \item We extend $\Ec$ by symmetric pairs of labels added to $\Sigma\uout$; formally,
         $$\Ec'=\Ec\cup\Set{(I_E,I_E),(I_L,I_L)}\cup\Set{(I_i,I_i)\dv
         i\in\Set{1,\ldots,\abs{\Sigma\uin}}}$$
     \end{itemize}
+    Now, we want to prove that $\Pi$ and $\tau(\Pi)$ have the same asymptotic locality;
+    specifically, we will show that there is a constant-round reduction from $\Pi$ to
+    $\tau(\Pi)$ and viceversa.
+
+    $\Pi\to\tau(\Pi)$: assume we have an algorithm $\Ac$ to solve $\Pi$ in $T(n)$ rounds.
+    Let $G$ be a graph
+
+    $\tau(\Pi)\to\Pi$: 
 \end{proof}
 \subsubsection{Solvability}
 We include definitions of B-hypergraph, B-hyperpath and hyperpath tree based on
