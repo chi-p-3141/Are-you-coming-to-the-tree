@@ -281,7 +281,7 @@ node can be in). For FSL problems we define it as $\card{\Nc}$.
             label $I_P$. Formally,
             \begin{align*}
                 \Nc'_3=\Nc'_2&\cup\Set{(\MSet{I_L},\emptyset),(\MSet{I_L,I_P},\emptyset),(\MSet{I_P,I_P},\emptyset),(\MSet{I_L,I_1},\emptyset)}\\
-                &\cup\Set{(\MSet{I_i,I_{i+1}},\emptyset)\dv i\in\Set{1,\ldots,\abs{\Sigma\uin}-1}}
+                &\cup\Bigl\{(\MSet{I_i,I_{i+1}},\emptyset)\Bigm| i\in\Set{1,\ldots,\abs{\Sigma\uin}-1}\Bigr\}\cup\Set{(\MSet{I_{\abs{\Sigma\uin}},I_E},\emptyset)}
             \end{align*}
             \item We allow nodes of degree $\geq 3$ who do not receive an input
             label to output anything: formally,
@@ -293,7 +293,7 @@ node can be in). For FSL problems we define it as $\card{\Nc}$.
             (\Sigma\uout\cup\Set{I_L,I_E})^{\MSet{2}}}$$
         \end{enumerate}
         \item We extend $\Ec$ by symmetric pairs of labels added to $\Sigma\uout$; formally,
-        $$\Ec'=\Ec\cup\Set{(I_E,I_E),(I_L,I_L)}\cup\Set{(I_i,I_i)\dv
+        $$\Ec'=\Ec\cup\Set{(I_E,I_E),(I_L,I_L),(I_P,I_P)}\cup\Set{(I_i,I_i)\dv
         i\in\Set{1,\ldots,\abs{\Sigma\uin}}}$$
     \end{itemize}
     Now, we want to prove that $\Pi$ and $\tau(\Pi)$ have the same asymptotic locality;
@@ -301,9 +301,18 @@ node can be in). For FSL problems we define it as $\card{\Nc}$.
     $\tau(\Pi)$ and viceversa.
 
     $\Pi\to\tau(\Pi)$: assume we have an algorithm $\Ac$ to solve $\Pi$ in $T(n)$ rounds.
-    Let $G$ be a graph
+    
 
-    $\tau(\Pi)\to\Pi$: 
+    $\tau(\Pi)\to\Pi$: assume we have an algorithm $\Ac$ to solve $\tau(\Pi)$ in $T(n)$
+    rounds. Let $(G=(V,E),l)$ be a $\Sigma\uin$-labelled graph with $n$ nodes, on which we
+    want to solve the problem $\Pi$; we construct a graph $G'$ as follows: first, append leaves to every node of the graph until every original
+    node has degree $\geq 2$; then append to each original node $v\in V$ a path of length $l(v)+1$, representing the
+    input label. Since we have appended at most $1+\abs{\Sigma\uin}+1$ new nodes to each
+    node $v$, this new graph has $\leq (\abs{\Sigma\uin}+3)n\in O(n)$ nodes. We apply $\Ac$ to
+    this new graph; we will now prove that if we restrict the output labelling of $\Ac$ to
+    the edges and nodes of the original $G$, we obtain a solution to $\Pi$. 
+
+    Now, assume that $\Pi$ is strongly unsolvable.
 \end{proof}
 \subsubsection{Solvability}
 We include definitions of B-hypergraph, B-hyperpath and hyperpath tree based on
@@ -438,7 +447,7 @@ solvability horizon. %in what time?
     between $S$ and $\bot$, then no unsolvable instances exist, and the solvability
     horizon of $\Pi$ is zero. If at least one path exists and no paths contain cycles,
     there are finitely many paths; we can iterate over all of them to obtain their maximum
-    diameter and the solvability horizon.\footnote{We are only concerned about finiteness
+    diameter and the solvability horizon.\footnote{We are only concerned about computability
     here; a discussion of the complexity of finding the longest hyperpath can be found in \cite{thakurLinearConnectivityProblems2009}}
 \end{proof}
 \begin{thm}
@@ -447,10 +456,25 @@ whether $\Pi$ is strongly unsolvable or weakly solvable and compute the solvabil
 horizon (if it exists). %in what time?
 \end{thm}
 \begin{proof}
-    Let $\Pi=(\Sigma_out,\Nc,\Ec)$. We show that either $\Pi$ is strongly unsolvable or it has the same solvability
-    horizon as a node-edge checkable problem.
-    
-    Define the problem $\Pi'$  
+    Let $\Pi=(\Sigma\uout,\Nc,\Ec)$. We will define a procedure we call $Simplify(\Pi)$, which will either return `SU' for
+    strongly unsolvable or a node edge checkable problem $\Pi_1$ with the same solvability
+    horizon as $\Pi$. We will define the auxiliary prodcedure $SimplifyStep(\Pi)$ first:
+    \begin{enumerate}
+        \item We turn $\Pi$ into a node-edge checkable problem $\Pi'$ without inputs by replacing $\Nc$ with $\Nc'$, where
+        $$\Nc'=\Set{R\cup P\dv (R,F)\in \Nc, P\subseteq F}.$$
+        In other words, $\Nc'$ contains the requirement from every configuration of $\Nc$ and
+        every combination of symbols in the corresponding fillers; even though we are abusing
+        notation slightly with the union, $P$ is intended to be a subset (containing at most one copy of
+        each filler symbol, including none).
+        \item Using the procedure we outlined above, we can build the \emph{existential graph of
+        classes} of $\Pi'$; by running a BFS search on it, we can find which classes are
+        \emph{possible} (=can be reached by a B-hyperpath from the starting nodes) and
+        which are \emph{infinitely possible} (=can be reached by a B-hyperpath which
+        contains a loop from the starting nodes).
+        \item We find the \emph{constant set} $\bigcap\Cc$ of the family $\Cc$, meaning
+        $$\bigcap\Cc:=\Set{x\in\Sigma\uout\dv\forall C\in\Cc, x\in C}.$$
+        \item 
+    \end{enumerate}
 \end{proof}
 
 \pagebreak
