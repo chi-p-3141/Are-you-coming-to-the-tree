@@ -7,12 +7,14 @@
 \input{Preamble/comp_line.tex}
 
 \begin{document}
-
-\section{Definitions}
+\tableofcontents
+\clearpage
+\section{FSL classes}
+\subsection{Definitions}
 % General note: I wrote this all out as an exercise in getting my definitions straight, it
 % does not need to be THIS detailed.
 
-\subsection{Notation}
+\subsubsection{Notation}
 We will use $\delta(v)$ to refer to the set of edges adjacent to $v$. We identify
 half-edges in a graph $G=(V,E)$ with a pair $(e,v)$ where $e\in\delta(v)$, referring to
 the half of $e$ adjacent to $v$.
@@ -24,7 +26,7 @@ of a set $A$:
     \item $A^{\MSet{\N}}$ refers to the set of all finite multisubsets of $A$,
     \item $A^{\MSet{\star}}$ refers to the set of all multisubsets of $A$,
 \end{itemize}
-\subsection{Common and uncommon assumptions}
+\subsubsection{Common and uncommon assumptions}
 %\airquotes{Unless otherwise \emph{explicitly} stated...}
 \textbf{$T$-hop neighbourhoods:} we define a \emph{$T$-hop centered neighbourhood} as a
 \emph{centered graph of radius $T$} using the definitions from page 4 of
@@ -51,7 +53,8 @@ not affect asymptotic complexity. We say that a problem is
 \emph{strongly unsolvable} if there are infinitely many unsolvable instances for it. We
 call the maximum diameter of an unsolvable instance the \emph{solvability horizon} of a
 weakly solvable problem; if the problem is always solvable, we define it as 0, and if it
-is strongly unsolvable, we define it as $\infty$.
+is strongly unsolvable, we define it as $\infty$. We denote the solvaility horizon of
+$\Pi$ as $S_h(\Pi)$.
 %note: some further nuance could be given for "infinitely many solvable and unsolvable
 %instances" eg, 2 colouring on cycles, but it is not relevant to the work I want to put in
 %here. similarly, "verifiably unsolvable" for infinitely many unsolvable instances that
@@ -93,7 +96,7 @@ Similar reasoning to the above as to why we can implictly assume that $\Sigma\ui
 $\Sigma\uout$ are finite sets. 
 
 
-\subsection{New-ish definitions}
+\subsubsection{New-ish definitions}
 %these are definitions that have appeared before (cited) but are not "commonly used" as
 %far as I could tell or are natural variants of common definitions
 \textbf{Hanging trees:} \emph{connected} tree graphs containing a finite number of
@@ -141,7 +144,7 @@ $\Ac\cong \mathcal{B}$) if $\Ac\into \mathcal{B}$ and $\mathcal{B}\into\Ac$.
 %the injectivity is a debatable part; depending on whether one wants some real
 %correspondence between the classes or simply the same complexity classes
 
-\subsection{Actually new definitions}
+\subsubsection{Actually new definitions}
 %There's some discussion I want to make about writing the def below in "round eliminator
 % formalism", but for now it's closer to node-edge checkable the "Extended" is the more
 % formally complicated but intuitive definition; the normal FSL definition is formally
@@ -226,7 +229,7 @@ $\max\Set{\card{R}\dv\exists F(\subset \Sigma\uout:R,F)\in\Nc}$.
 $h(\Pi):=\max\Set{\card{\Nc(\chi)}\dv\chi\in\Sigma\uin}$ (the maximum number of configurations any
 node can be in). For FSL problems we define it as $\card{\Nc}$.
 
-\section{List of results}
+\subsection{List of results}
 \begin{enumerate}
     \item FSL $\into$ EFSL, but EFSL$\not\into$FSL as it cannot encode the function $f$. 
     \item I-FSL $\cong$ FSL.
@@ -234,7 +237,7 @@ node can be in). For FSL problems we define it as $\card{\Nc}$.
     nodes of deg $>\Delta$ are unconstrained).
     \item Weak and strong solvability are decidable on FSL.
 \end{enumerate}
-\section{List of possible results}
+\subsection{List of possible results}
 \begin{enumerate}
     \item If a FSL problem is known to be $\Omega(\log n)$ on trees, its complexity on
     trees is decidable and an efficient algorithm can be found.
@@ -249,8 +252,7 @@ node can be in). For FSL problems we define it as $\card{\Nc}$.
 \end{enumerate}
 
 
-\section{Proofs} 
-\subsection{Old(er) proofs that I finally formalised}
+\subsection{Proofs} 
 \subsubsection{Equivalence of FSL and I-FSL}
 \begin{thm}
     FSL $\cong$ I-FSL.
@@ -345,8 +347,7 @@ We include definitions of B-hypergraph, B-hyperpath and hyperpath tree based on
 
 \begin{thm}
 Let $\Pi$ be a node-edge checkable problem. Then it is possible to decide
-whether $\Pi$ is strongly unsolvable or weakly solvable on trees and compute the 
-solvability horizon. %in what time?
+whether $\Pi$ is strongly unsolvable or weakly solvable on trees and compute $S_h(\Pi)$. %in what time?
 \end{thm}
 \begin{proof}
     Let $\Pi=(\Delta,\Sigma\uin,\Sigma\uout,\Nc,\Ec)$, we construct the \emph{existential graph of classes} of $\Pi$,
@@ -376,7 +377,7 @@ solvability horizon. %in what time?
     powerset. To find the edges of type (A) we define a set of \emph{reached classes}
     which we initialise as the set of starting nodes
     $\Cc:=\Set{\Nc_{1,\chi}}_{\chi\in\Sigma\uin}$; if $\emptyset\in\Cc$, the problem is
-    strongly unsolvable and the solvability horizon is $\infty$. We assume this is not the case.
+    strongly unsolvable and $S_h(\Pi)=\infty$. We assume this is not the case.
     
     Then, we iterate over all the ornaments
     of height 1 (ie containing only the hook node and leaves) and max degree $\Delta$, over
@@ -408,7 +409,7 @@ solvability horizon. %in what time?
     induction, so are all finite ornaments; we denote as $f$ the function mapping
     ornaments to their encoding edges.
 
-    $[\bigstar 2]$ We claim that the unsolvability horizon of $\Pi$ corresponds to the
+    $[\bigstar 2]$ We claim that the solvability horizon of $\Pi$ corresponds to the
     maximum over the diameters of all hyperpath trees starting from the set $S$ of
     starting/leaf nodes and ending in $\bot$. More precisely, we claim for each such \emph{finite}
     hyperpath tree of diameter $d$ we can construct an unsolvable instance of diameter $d+1$ and for each
@@ -443,7 +444,7 @@ solvability horizon. %in what time?
     Finally, note that the proof above applies to finite hyperpath trees. If any hyperpath
     from $S$ to $\bot$ contains a cycle, then we can find hyperpath trees of arbitrarily
     large finite depth; then we can find unsolvable instances of arbitrarily
-    large depth, and $\Pi$ is strongly unsolvable (with a solvability horizon of $\infty$). Similarly, if no hyperpaths exist
+    large depth, and $\Pi$ is strongly unsolvable (so $S_h(\Pi)=\infty$). Similarly, if no hyperpaths exist
     between $S$ and $\bot$, then no unsolvable instances exist, and the solvability
     horizon of $\Pi$ is zero. If at least one path exists and no paths contain cycles,
     there are finitely many paths; we can iterate over all of them to obtain their maximum
@@ -452,31 +453,66 @@ solvability horizon. %in what time?
 \end{proof}
 \begin{thm}
 Let $\Pi$ be a FSL problem. Then it is possible to decide
-whether $\Pi$ is strongly unsolvable or weakly solvable and compute the solvability
-horizon (if it exists). %in what time?
+whether $\Pi$ is strongly unsolvable or weakly solvable and compute $S_h(\Pi)$. %in what time?
 \end{thm}
 \begin{proof}
-    Let $\Pi=(\Sigma\uout,\Nc,\Ec)$. We will define a procedure we call $Simplify(\Pi)$, which will either return `SU' for
-    strongly unsolvable or a node edge checkable problem $\Pi_1$ with the same solvability
-    horizon as $\Pi$. We will define the auxiliary prodcedure $SimplifyStep(\Pi)$ first:
+    Let $\Pi=(\Sigma\uout,\Nc,\Ec)$. We will create a procedure we call $Simplify$, which
+    will return a node edge checkable problem $\Pi'$ and a value $k$ such that $S_h(\Pi)=\max\{S_h(\Pi'),k\}$. We define $Simplify(\Pi)$ as follows:
     \begin{enumerate}
-        \item We turn $\Pi$ into a node-edge checkable problem $\Pi'$ without inputs by replacing $\Nc$ with $\Nc'$, where
-        $$\Nc'=\Set{R\cup P\dv (R,F)\in \Nc, P\subseteq F}.$$
-        In other words, $\Nc'$ contains the requirement from every configuration of $\Nc$ and
+        \item We turn $\Pi$ into a node-edge checkable problem $\Pi_1$ without inputs by replacing $\Nc$ with $\Nc'$, where
+        $$\Nc_1=\Set{R\cup P\dv (R,F)\in \Nc, P\subseteq F}.$$
+        In other words, $\Nc_1$ contains the requirement from every configuration of $\Nc$ and
         every combination of symbols in the corresponding fillers; even though we are abusing
         notation slightly with the union, $P$ is intended to be a subset (containing at most one copy of
         each filler symbol, including none).
         \item Using the procedure we outlined above, we can build the \emph{existential graph of
-        classes} of $\Pi'$; by running a BFS search on it, we can find which classes are
-        \emph{possible} (=can be reached by a B-hyperpath from the starting nodes) and
-        which are \emph{infinitely possible} (=can be reached by a B-hyperpath which
-        contains a loop from the starting nodes).
-        \item We find the \emph{constant set} $\bigcap\Cc$ of the family $\Cc$, meaning
-        $$\bigcap\Cc:=\Set{x\in\Sigma\uout\dv\forall C\in\Cc, x\in C}.$$
-        \item 
+        classes} of $\Pi'$; we then run a BFS search on this hypergraph to compute all of
+        the \emph{longest} B-hyperpaths\footnote{The length of a B-hyperpath is the same as
+        the diameter of corresponding hyperpath tree.} from the starting nodes to each
+        node. We denote this as $LongPath(C)$ and collect the results in a set of pairs $\Cc$, formally defined as
+        $$\Cc=\Set{(C,k)\dv
+        C\subseteq\Sigma\uout,k=\begin{cases}0&\text{if there is no B-hyperpath to $C$,}\\\infty&\text{if $LongPath(C)$ contains a loop,}\\\abs{LongPath(C)}&\text{
+        otherwise}\end{cases}}.$$
+        \item We iterate through $\Nc$, constructing sets
+        $\Nc',\mathcal{F}$\footnote{Note that $\mathcal{F}$ is not part of the output of
+        $Simplify$, but is useful in proving its correctness.} and $k$ as
+        follows: %make this pseudocode
+        initialise $m=0,\Nc'=\mathcal{F}=\emptyset$. For each $(R,F)\in \Nc$, if there is a pair $(C,k)\in\Cc$ such that $C\cap
+        F=\emptyset$ and $k\neq 0$, then we add $C$ to $\mathcal{F}$ and update $m$ to be the maximum of
+        its previous value and $k$; if there is no such pair, we add $R$ to $\Nc$.
+        \item We output $\Pi'=(\Sigma\uout,\Nc',\Ec)$ and $k$. 
     \end{enumerate}
+    This algorithm obviously terminates; we will prove that it is correct, by showing that
+    every unsolvable instance of $\Pi$ corresponds to an unsolvable instance of $\Pi'$ up
+    to appending
 \end{proof}
 
 \pagebreak
+\section{First-order logic}
+\subsection{Previous results}
+\emph{Note: mostly here for me to have an overview and clickable common references; written as
+if it was part of a paper as an exercise/research break activity.}
+
+There is no doubt that LCL problems, defined by \cite{naor_what_1993}, form the most
+extensively studied class of problems in the LOCAL model. Great progress happened mainly
+in the last ten years, started from papers showing the presence of gaps \cite{changExponential2019}
+\cite{chang_time_2017} and dense regions \cite{balliuNewClasses2018}. Now, the complexity landscape of LCL problems is almost completely known, in both the
+deterministic and randomised setting; see \cite{suomelaSWATtalk2020}
+for an overview. 
+
+The LCL class is defined only on graphs with constant maximum degree and constant input
+and output label size; this way, any LCL problem can be finitely described by the set of all
+correctly labelled $r$-radius neighbourhoods. This property is useful for \emph{automated
+algorithm synthesis}, that is, generating an optimal algorithm from the problem
+description; this has been successful on paths, cycles [CITE?] and grids
+\cite{brandtGrids2017}.
+
+Given the above, we can describe an ideal generalisation of the LCL class as containing
+problems that can be \emph{finitely described} and \emph{locally verified} by a
+distributed algorithm. The largest possible class of verifiers that can be used is the
+class of \emph{locally decidable} problems, as studied in \cite{fraigniaudComplexity2013}
+and \cite{balliuVerified2018}; we can then define theS 
+
+\clearpage
 \printbibliography[ heading=bibintoc, title={Bibliography}]
 \end{document}
