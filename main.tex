@@ -510,9 +510,72 @@ description; this has been successful on paths, cycles [CITE?] and grids
 Given the above, we can describe an ideal generalisation of the LCL class as containing
 problems that can be \emph{finitely described} and \emph{locally verified} by a
 distributed algorithm. The largest possible class of verifiers that can be used is the
-class of \emph{locally decidable} problems, as studied in \cite{fraigniaudComplexity2013}
-and \cite{balliuVerified2018}; we can then define theS 
+class of \emph{locally decidable} (LD) problems, as studied in \cite{fraigniaudComplexity2013}; we can then define the corresponding class of \emph{locally
+verifiable} (LV) problems following \cite{balliuVerified2018} as problems whose verifier
+is in LD. While this class is large and easily definable, it is hard to reason about in
+terms of automated algorithm synthesis; algorithms, while finite, do not have a commonly used universal
+notation that would allow for this kind of analysis. As an example, consider 2-colouring
+and 3-colouring on trees; two problems that can be verified by two algorithms described
+exactly the same way in pseudocode, but which have vastly different local complexities. 
 
+A different approach was taken in [gustav's paper] with the class of \emph{locally
+finite labelling} (LFL) problems, which have a structure similar to that of LCL problems
+but allow for \emph{optional edges}. Thanks to this similarity, the gap theorem for the
+$O(\log n)---\Omega(n)$ part of the complexity landscape of LCL problems on trees has been
+shown to hold on LFL problems as well [cite same paper again]; however, this formulation
+excludes many natural problems that are locally verifiable. 
+
+In this work, we take a middle-ground approach: we describe problems through a subset of
+first-order logic sentences called \emph{local formulas}, define the class of LFO (local
+first order) problems, and show various results related to them. (\emph{Vague, but the
+list is updating often.})
+\clearpage
+\subsection{Results}
+Ever-changing list of results on LFO:
+\begin{itemize}
+    \item $LCL\subsetneq LFL\underset{?}{\subseteq} LFO \subsetneq LV$
+    \item $0$-round solvability is decidable. (trying to prove it for $k$-round
+    solvability for any constant $k$)
+\end{itemize}
+\subsection{Finite model theory notes}
+\emph{Again mostly here as an exercise/reference, but parts of it would be useful/necessary for a 
+proper write-up anyways. Not well formatted, for now.}
+
+A \emph{vocabulary} is a set of symbols, each having an integer value called \emph{arity}.
+Symbols with arity $=0$ are called \emph{constants}, otherwise \emph{relations}. A
+\emph{structure} for the vocabulary $\tau$ is composed of a set $A$ called the universe,
+an element $c^A$ of $A$ for every constant $c$ of $\tau$, and a $n$-ary relation $R^A$ on
+$A$ for every relation $R$ of $\tau$ with arity $n$. A structure is finite if its universe
+is finite.
+
+A formula of first-order logic on a vocabulary $\tau$ is a string of symbols in the alphabet containing countably infinite
+variables $v_1,\ldots,v_n$, the connectives $\lnot,\lor$, the quantifier $\exists$, the
+equality symbol $=$, parenthesis symbols $(,)$, and the symbols in $\tau$ which is
+well-formed, meaning it can be recursively created from the following rules:
+\begin{enumerate}[(\roman*)]
+    \item If $t_1,t_2$ are variables or constants (together called \emph{terms}), then
+    $t_0=t_1$ is a formula.
+    \item If $t_1,\ldots, t_n$ are terms and $R$ is a symbol of $\tau$ with arity $n$,
+    then $Rt_1\ldots t_n$ is a formula.
+    \item If $\phi$ is a formula, $\lnot\phi$ is a formula.
+    \item If $\phi,\psi$ are formulas, then $(\phi\lor\psi)$ is a formula.
+    \item If $\phi$ is a formula and $x$ is a variable then $\exists x \phi$ is a formula.
+\end{enumerate}
+If a formula is a result of only (i) and (ii), it is an \emph{atomic} formula. Denote by
+FO$[\tau]$ the set of formulas of first-order logic on $\tau$. Commonly, we omit
+parenthesis when they are understandable from context and use a list of auxiliary symbols:
+\begin{itemize}
+    \item $t_1\neq t_2$ for $\lnot(t_1=t_2)$,
+    \item $\phi\land\psi$ for $\lnot(\lnot\phi\lor\lnot\psi)$,
+    \item $\phi\implies\psi$ for $(\lnot\phi\lor\psi)$,
+    \item $\phi\iff\psi$ for $(\phi\implies\psi)\land(\psi\implies\phi)$,
+    \item $\forall x \phi$ for $\lnot(\exists x\lnot \phi)$, and
+    \item for $R$ relation with arity $1$: $x\in R$ for $Rx$.
+\end{itemize}
+
+
+A variable is called \emph{bound} if it appears in the scope of a corresponding
+quantifier, \emph{free} otherwise. A formula is called a \emph{sentence} if it has no free variables.
 \clearpage
 \printbibliography[ heading=bibintoc, title={Bibliography}]
 \end{document}
